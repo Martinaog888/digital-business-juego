@@ -25,15 +25,28 @@
 @media(prefers-reduced-motion:reduce){.character.winner .creature{animation:none}}
 
 
+header{height:auto;min-height:94px;flex-wrap:wrap;padding:18px 0;gap:16px}.course{display:none}
+.language-picker{display:flex;align-items:center;gap:10px;margin-left:auto}
+.language-caption{font-size:11px;color:#85758f;font-weight:700}
+.language-options{display:flex;gap:3px;background:#eee8f7;border-radius:12px;padding:4px}
+.language-options button{border:0;border-radius:9px;padding:9px 10px;background:transparent;color:#756381;font-size:11px;white-space:nowrap}
+.language-options button[aria-pressed="true"]{background:#7952db;color:white;box-shadow:0 2px 5px #7952db33}
+.status-bar{flex-wrap:wrap;line-height:1.6}.status-bar #remaining{margin-left:auto}
+.score-row{flex-wrap:wrap;line-height:1.5}.center-label{padding:0 7px}#stage-description{line-height:1.6}
+@media(max-width:1000px){.language-caption{display:none}.language-options button{padding:9px 7px}.center-label{left:5%;width:90%}#stage-title{font-size:19px}#stage-description{font-size:11px}}
+@media(max-width:740px){header{gap:12px}.brand{order:0}.icon-button{order:1;margin-left:auto}.language-picker{order:2;flex-basis:100%;margin:0}.language-options{width:100%;justify-content:space-between}.language-options button{flex:1;padding:10px 5px;font-size:11px}.center-label{top:7px}#stage-title{font-size:17px;margin:5px 0}#stage-description{font-size:10px}.rules h2{line-height:1.3}.roster-heading{gap:8px}}
+
+h1>[data-i18n="headline"]{color:var(--ink)}
+
 </style></head>
 <body>
 <div class="app">
-<header><a class="brand" href="index.html"><span class="brand-icon">♫</span> la sillita<span class="dot">.</span></a><div class="course">DIGITAL BUSINESS <span>·</span> JUEGA EN COMPAÑÍA</div><button id="sound" class="icon-button" aria-pressed="true">♫ Sonido activado</button></header>
+<header><a class="brand" href="La-Sillita.html"><span class="brand-icon">♫</span> la sillita<span class="dot">.</span></a><div class="course"><span data-i18n="course">DIGITAL BUSINESS · JUEGA EN COMPAÑÍA</span></div><nav class="language-picker" aria-label="Idioma"><span class="language-caption" data-i18n="language">Idioma</span><div class="language-options"><button type="button" data-language="en-GB" lang="en-GB" aria-pressed="false">🇬🇧 English</button><button type="button" data-language="es-ES" lang="es-ES" aria-pressed="true">🇪🇸 Español</button><button type="button" data-language="pl-PL" lang="pl-PL" aria-pressed="false">🇵🇱 Polski</button><button type="button" data-language="de-DE" lang="de-DE" aria-pressed="false">🇩🇪 Deutsch</button></div></nav><button id="sound" class="icon-button" aria-pressed="true">♫ Sonido activado</button></header>
 <main>
-<div class="intro"><span class="eyebrow">EL CLÁSICO, CON MÁS RITMO</span><h1>Que no te quiten <span>tu sitio.</span></h1><p>Música, reflejos y una silla de menos. ¿Quién se sienta primero?</p></div>
+<div class="intro"><span class="eyebrow"><span data-i18n="eyebrow">EL CLÁSICO, CON MÁS RITMO</span></span><h1><span data-i18n="headline">Que no te quiten</span> <span><span data-i18n="accent">tu sitio.</span></span></h1><p><span data-i18n="intro">Música, reflejos y una silla de menos. ¿Quién se sienta primero?</span></p></div>
 <div class="layout">
 <section class="game-panel" aria-label="Zona de juego">
-<div class="game-top"><span class="live"><i></i> SOLO PERSONAS, CERO BOTS</span><span id="round">PREPARA TU PARTIDA</span></div>
+<div class="game-top"><span class="live"><i></i><span data-i18n="live">SOLO PERSONAS, CERO BOTS</span></span><span id="round">PREPARA TU PARTIDA</span></div>
 <div id="arena" class="arena">
 <div class="floor"></div><span class="note note-one" aria-hidden="true">♪</span><span class="note note-two" aria-hidden="true">♫</span>
 <div id="chairs" class="chairs"></div><div id="characters"></div>
@@ -43,13 +56,13 @@
 <div class="status-bar"><span id="status" role="status" aria-live="polite">Elige cuántas personas vais a jugar.</span><span id="remaining">3 sillas · 4 personas</span></div>
 </section>
 <aside>
-<section class="card setup"><span class="eyebrow">QUE EMPIECE LA FIESTA</span><h2>Vuestro próximo pique.</h2><label class="field-label">¿Cuántas personas jugáis?</label><div class="count-selector" role="group" aria-label="Número de participantes"><button data-count="2" aria-pressed="false">2</button><button data-count="3" aria-pressed="false">3</button><button data-count="4" aria-pressed="true" class="selected">4</button></div><div class="roster-heading"><span>PARTICIPANTE</span><span>SU TECLA</span></div><div id="roster"></div><button id="play" class="primary">Empezar partida <span>↗</span></button><button id="reset" class="text-button" hidden>Volver a jugar</button><p class="local-note">Un ordenador. Un teclado. Mucho ritmo.</p></section>
-<section class="card scoreboard"><div class="section-heading"><h2>El marcador</h2><span>ESTA PARTIDA</span></div><div id="scores"></div></section>
+<section class="card setup"><span class="eyebrow"><span data-i18n="setupEyebrow">QUE EMPIECE LA FIESTA</span></span><h2><span data-i18n="setupTitle">Vuestro próximo pique.</span></h2><label class="field-label"><span data-i18n="howMany">¿Cuántas personas jugáis?</span></label><div class="count-selector" role="group" aria-label="Número de participantes"><button data-count="2" aria-pressed="false">2</button><button data-count="3" aria-pressed="false">3</button><button data-count="4" aria-pressed="true" class="selected">4</button></div><div class="roster-heading"><span><span data-i18n="participant">PARTICIPANTE</span></span><span><span data-i18n="key">SU TECLA</span></span></div><div id="roster"></div><button id="play" class="primary">Empezar partida <span>↗</span></button><button id="reset" class="text-button" hidden>Volver a jugar</button><p class="local-note"><span data-i18n="localNote">Un ordenador. Un teclado. Mucho ritmo.</span></p></section>
+<section class="card scoreboard"><div class="section-heading"><h2><span data-i18n="scoreboard">El marcador</span></h2><span><span data-i18n="thisGame">ESTA PARTIDA</span></span></div><div id="scores"></div></section>
 </aside>
 </div>
-<section class="rules"><div><span class="eyebrow">ASÍ SE JUEGA</span><h2>Oídos atentos.<br>Dedos preparados.</h2></div><article><b>01</b><h3>Sigue el ritmo</h3><p>Los personajes bailan mientras suena la música. ¡Todavía no pulses!</p></article><article><b>02</b><h3>¡Ahora, a la silla!</h3><p>Cuando pare la música y aparezca «¡Siéntate!», pulsa tu tecla una vez.</p></article><article><b>03</b><h3>Solo queda una persona</h3><p>Hay una silla menos por ronda. Quien se queda sin sitio sale de la partida.</p></article></section>
-<div class="fineprint">Si te adelantas, suelta la tecla y vuelve a pulsar al parar la música. No vale mantenerla pulsada.<br>Las pulsaciones se resuelven por orden de llegada al navegador. Si cambiáis de pestaña, la ronda se repite.</div>
-</main><footer><span>la sillita. <span class="footer-light">Un juego para compartir.</span></span><span>Hecho para Digital Business · 2–4 personas</span></footer>
+<section class="rules"><div><span class="eyebrow"><span data-i18n="howTo">ASÍ SE JUEGA</span></span><h2><span data-i18n="rulesTitle">Oídos atentos. Dedos preparados.</span></h2></div><article><b>01</b><h3><span data-i18n="rule1Title">Sigue el ritmo</span></h3><p><span data-i18n="rule1">Los personajes bailan mientras suena la música. ¡Todavía no pulses!</span></p></article><article><b>02</b><h3><span data-i18n="rule2Title">¡Ahora, a la silla!</span></h3><p><span data-i18n="rule2">Cuando pare la música y aparezca «¡Siéntate!», pulsa tu tecla una vez.</span></p></article><article><b>03</b><h3><span data-i18n="rule3Title">Solo queda una persona</span></h3><p><span data-i18n="rule3">Hay una silla menos por ronda. Quien se queda sin sitio sale de la partida.</span></p></article></section>
+<div class="fineprint"><span data-i18n="fineprint">Si te adelantas, suelta la tecla y vuelve a pulsar al parar la música. No vale mantenerla pulsada. Las pulsaciones se resuelven por orden de llegada al navegador. Si cambiáis de pestaña, la ronda se repite.</span></div>
+</main><footer><span>la sillita. <span class="footer-light"><span data-i18n="footer">Un juego para compartir.</span></span></span><span><span data-i18n="credit">Hecho para Digital Business · 2–4 personas</span></span></footer>
 </div><script>
 /* Motor de reglas, independiente del navegador y sin jugadores automáticos. */
 (function (root) {
@@ -103,7 +116,7 @@ const $ = id => document.getElementById(id);
 const palette = ["#f9b0b2","#f6cc6b","#96d8c4","#b5a3ee"];
 const keys = ["KeyA","KeyF","KeyJ","KeyL"];
 const labels = ["A","F","J","L"];
-const animalNames = ["Panda", "Dragón", "Perro", "Conejo"];
+
 // Ilustraciones vectoriales locales: se escalan sin perder nitidez.
 function animalSvg(id) {
  const bodies = [
@@ -119,11 +132,71 @@ function animalSvg(id) {
 }
 
 
+const translations = {
+ "es-ES": {
+ title:"La Sillita · Sillas musicales", course:"DIGITAL BUSINESS · JUEGA EN COMPAÑÍA", eyebrow:"EL CLÁSICO, CON MÁS RITMO", headline:"Que no te quiten", accent:"tu sitio.", intro:"Música, reflejos y una silla de menos. ¿Quién se sienta primero?",
+ gameArea:"Zona de juego", live:"SOLO PERSONAS, CERO BOTS", prepare:"PREPARA TU PARTIDA", setupEyebrow:"QUE EMPIECE LA FIESTA", setupTitle:"Vuestro próximo pique.", howMany:"¿Cuántas personas jugáis?", countLabel:"Número de participantes", participant:"PARTICIPANTE", key:"SU TECLA", localNote:"Un ordenador. Un teclado. Mucho ritmo.", scoreboard:"El marcador", thisGame:"ESTA PARTIDA", howTo:"ASÍ SE JUEGA", rulesTitle:"Oídos atentos. Dedos preparados.", rule1Title:"Sigue el ritmo", rule1:"Los personajes bailan mientras suena la música. ¡Todavía no pulses!", rule2Title:"¡Ahora, a la silla!", rule2:"Cuando pare la música y aparezca «¡Siéntate!», pulsa tu tecla una vez.", rule3Title:"Solo queda una persona", rule3:"Hay una silla menos por ronda. Quien se queda sin sitio sale de la partida.", fineprint:"Si te adelantas, suelta la tecla y vuelve a pulsar al parar la música. No vale mantenerla pulsada. Las pulsaciones se resuelven por orden de llegada al navegador. Si cambiáis de pestaña, la ronda se repite.", footer:"Un juego para compartir.", credit:"Hecho para Digital Business · 2–4 personas", language:"Idioma", player:"Jugador {n}", shortPlayer:"J{n}", animals:["Panda","Dragón","Perro","Conejo"], round:"RONDA {n} / {total}", winnerLabel:"★ Ganador", outLabel:"Fuera", chairs:{one:"{n} silla",other:"{n} sillas"}, people:{one:"{n} persona",other:"{n} personas"},
+ readyTitle:"Todo listo para bailar", readyDescription:"Reúne a tu equipo y dale al play.", readyStatus:"Elige cuántas personas vais a jugar.", start:"Empezar partida", replay:"Volver a jugar", next:"Siguiente ronda", repeatRound:"Repetir ronda", running:"La ronda está en marcha ♫", musicTitle:"¡Sigue el ritmo!", musicDescription:"Espera… la música puede parar en cualquier momento.", musicStatus:"No pulses hasta que se detenga la música.", visualStatus:"Sigue la señal visual: espera a «¡Siéntate!».", audioError:"Audio no disponible: sigue la señal visual «¡Siéntate!».", stopTitle:"¡Siéntate!", stopDescription:"Pulsa tu tecla. ¡Cada milisegundo cuenta!", stopStatus:"¡La música ha parado! Consigue tu silla.", early:"Jugador {n}: ¡todavía no! Suelta la tecla y espera.", seated:"Jugador {n} ya tiene silla. ¡Aún queda sitio!", eliminated:"Jugador {n} se ha quedado sin silla en la ronda {round}.", winTitle:"¡Gana el jugador {n}!", winDescription:"Reflejos de campeón. ¿Os atrevéis con la revancha?", resultTitle:"¡Una silla menos!", resultDescription:"Jugador {n} queda eliminado. Seguimos bailando.", pauseTitle:"Una pausa para todos", pauseDescription:"La ronda se repetirá cuando estéis preparados.", pauseStatus:"Ronda anulada al salir de la ventana. Nadie queda eliminado.", soundOn:"♫ Sonido activado", soundOff:"♫ Sonido desactivado"
+ },
+ "en-GB": {
+ title:"La Sillita · Musical Chairs", course:"DIGITAL BUSINESS · PLAY TOGETHER", eyebrow:"THE CLASSIC, WITH MORE RHYTHM", headline:"Don't lose", accent:"your seat.", intro:"Music, quick reactions and one chair too few. Who will sit down first?",
+ gameArea:"Play area", live:"REAL PEOPLE, NO BOTS", prepare:"GET READY TO PLAY", setupEyebrow:"LET THE PARTY BEGIN", setupTitle:"A little friendly competition.", howMany:"How many people are playing?", countLabel:"Number of players", participant:"PLAYER", key:"THEIR KEY", localNote:"One computer. One keyboard. Plenty of rhythm.", scoreboard:"Scoreboard", thisGame:"THIS GAME", howTo:"HOW TO PLAY", rulesTitle:"Ears open. Fingers ready.", rule1Title:"Follow the rhythm", rule1:"The animals dance while the music plays. Don't press your key yet!", rule2Title:"Grab a chair!", rule2:"When the music stops and “Sit down!” appears, press your key once.", rule3Title:"Last player standing", rule3:"There is one fewer chair than players in each round. Whoever misses out is eliminated.", fineprint:"If you press too early, release your key and press again once the music stops. Holding it down doesn't count. Key presses are processed in the order the browser receives them. Switching tabs restarts the round.", footer:"A game to share.", credit:"Made for Digital Business · 2–4 players", language:"Language", player:"Player {n}", shortPlayer:"P{n}", animals:["Panda","Dragon","Dog","Rabbit"], round:"ROUND {n} / {total}", winnerLabel:"★ Winner", outLabel:"Out", chairs:{one:"{n} chair",other:"{n} chairs"}, people:{one:"{n} player",other:"{n} players"},
+ readyTitle:"Ready to dance", readyDescription:"Gather your friends and press play.", readyStatus:"Choose how many people are playing.", start:"Start game", replay:"Play again", next:"Next round", repeatRound:"Replay round", running:"Round in progress ♫", musicTitle:"Follow the rhythm!", musicDescription:"Wait… the music could stop at any moment.", musicStatus:"Don't press until the music stops.", visualStatus:"Watch the screen: wait for “Sit down!”.", audioError:"Audio unavailable: watch for the “Sit down!” message.", stopTitle:"Sit down!", stopDescription:"Press your key. Every millisecond counts!", stopStatus:"The music has stopped! Grab your chair.", early:"Player {n}: not yet! Release your key and wait.", seated:"Player {n} has a chair. There's still room!", eliminated:"Player {n} missed out on a chair in round {round}.", winTitle:"Player {n} wins!", winDescription:"Champion reactions! Fancy a rematch?", resultTitle:"One fewer chair!", resultDescription:"Player {n} is out. Let's keep dancing.", pauseTitle:"A break for everyone", pauseDescription:"Replay the round when everyone is ready.", pauseStatus:"Round cancelled after leaving the window. No one is eliminated.", soundOn:"♫ Sound on", soundOff:"♫ Sound off"
+ },
+ "pl-PL": {
+ title:"La Sillita · Muzyczne krzesła", course:"DIGITAL BUSINESS · GRAJCIE RAZEM", eyebrow:"KLASYCZNA GRA W NOWYM RYTMIE", headline:"Nie daj sobie zabrać", accent:"miejsca.", intro:"Muzyka, refleks i o jedno krzesło za mało. Kto usiądzie pierwszy?",
+ gameArea:"Plansza gry", live:"TYLKO LUDZIE, ŻADNYCH BOTÓW", prepare:"PRZYGOTUJCIE SIĘ DO GRY", setupEyebrow:"NIECH ZACZNIE SIĘ ZABAWA", setupTitle:"Czas na przyjazną rywalizację.", howMany:"Ile osób gra?", countLabel:"Liczba graczy", participant:"GRACZ", key:"KLAWISZ", localNote:"Jeden komputer. Jedna klawiatura. Mnóstwo rytmu.", scoreboard:"Wyniki", thisGame:"TA ROZGRYWKA", howTo:"JAK GRAĆ", rulesTitle:"Nadstawcie uszu. Przygotujcie palce.", rule1Title:"Poczuj rytm", rule1:"Zwierzątka tańczą, gdy gra muzyka. Jeszcze nie naciskaj klawisza!", rule2Title:"Zajmij krzesło!", rule2:"Gdy muzyka ucichnie i pojawi się napis „Siadaj!”, naciśnij swój klawisz jeden raz.", rule3Title:"Zostaje jedna osoba", rule3:"W każdej rundzie jest o jedno krzesło mniej niż graczy. Osoba bez miejsca odpada.", fineprint:"Jeśli naciśniesz za wcześnie, puść klawisz i naciśnij go ponownie, gdy muzyka ucichnie. Przytrzymywanie klawisza się nie liczy. Liczy się kolejność, w jakiej przeglądarka odbierze naciśnięcia. Po zmianie karty runda zostanie powtórzona.", footer:"Gra do wspólnej zabawy.", credit:"Projekt na zajęcia Digital Business · 2–4 graczy", language:"Język", player:"Gracz {n}", shortPlayer:"G{n}", animals:["Panda","Smok","Pies","Królik"], round:"RUNDA {n} / {total}", winnerLabel:"★ Zwycięzca", outLabel:"Poza grą", chairs:{one:"{n} krzesło",few:"{n} krzesła",many:"{n} krzeseł",other:"{n} krzesła"}, people:{one:"{n} gracz",few:"{n} graczy",many:"{n} graczy",other:"{n} gracza"},
+ readyTitle:"Gotowi do tańca", readyDescription:"Zbierz znajomych i rozpocznij grę.", readyStatus:"Wybierz liczbę graczy.", start:"Rozpocznij grę", replay:"Zagraj ponownie", next:"Następna runda", repeatRound:"Powtórz rundę", running:"Runda w toku ♫", musicTitle:"Poczuj rytm!", musicDescription:"Czekaj… muzyka może ucichnąć w każdej chwili.", musicStatus:"Nie naciskaj, dopóki muzyka nie ucichnie.", visualStatus:"Patrz na ekran: poczekaj na napis „Siadaj!”.", audioError:"Dźwięk niedostępny: czekaj na napis „Siadaj!”.", stopTitle:"Siadaj!", stopDescription:"Naciśnij swój klawisz. Liczy się każda milisekunda!", stopStatus:"Muzyka ucichła! Zajmij krzesło.", early:"Gracz {n}: jeszcze nie! Puść klawisz i poczekaj.", seated:"Gracz {n} ma już krzesło. Są jeszcze wolne miejsca!", eliminated:"Gracz {n} nie zajął krzesła w rundzie {round}.", winTitle:"Wygrywa gracz {n}!", winDescription:"Mistrzowski refleks! Czas na rewanż?", resultTitle:"O jedno krzesło mniej!", resultDescription:"Gracz {n} odpada. Tańczymy dalej.", pauseTitle:"Przerwa dla wszystkich", pauseDescription:"Powtórzcie rundę, gdy wszyscy będą gotowi.", pauseStatus:"Runda anulowana po opuszczeniu okna. Nikt nie odpada.", soundOn:"♫ Dźwięk włączony", soundOff:"♫ Dźwięk wyłączony"
+ },
+ "de-DE": {
+ title:"La Sillita · Reise nach Jerusalem", course:"DIGITAL BUSINESS · GEMEINSAM SPIELEN", eyebrow:"DER KLASSIKER MIT MEHR RHYTHMUS", headline:"Sichere dir", accent:"deinen Platz.", intro:"Musik, schnelle Reaktionen und ein Stuhl zu wenig. Wer sitzt zuerst?",
+ gameArea:"Spielfeld", live:"NUR MENSCHEN, KEINE BOTS", prepare:"MACHT EUCH BEREIT", setupEyebrow:"DIE PARTY KANN BEGINNEN", setupTitle:"Zeit für ein kleines Duell.", howMany:"Wie viele Personen spielen mit?", countLabel:"Anzahl der Mitspielenden", participant:"SPIELER", key:"TASTE", localNote:"Ein Computer. Eine Tastatur. Jede Menge Rhythmus.", scoreboard:"Punktestand", thisGame:"DIESES SPIEL", howTo:"SO WIRD GESPIELT", rulesTitle:"Ohren auf. Finger bereit.", rule1Title:"Folge dem Rhythmus", rule1:"Die Tiere tanzen, solange die Musik läuft. Drücke deine Taste noch nicht!", rule2Title:"Schnapp dir einen Stuhl!", rule2:"Sobald die Musik stoppt und „Hinsetzen!“ erscheint, drücke deine Taste einmal.", rule3Title:"Eine Person gewinnt", rule3:"In jeder Runde gibt es einen Stuhl weniger als Mitspielende. Wer keinen Platz bekommt, scheidet aus.", fineprint:"Wenn du zu früh drückst, lass die Taste los und drücke erneut, sobald die Musik stoppt. Gedrückthalten zählt nicht. Entscheidend ist die Reihenfolge, in der die Tastendrücke beim Browser ankommen. Beim Wechseln des Tabs wird die Runde wiederholt.", footer:"Ein Spiel für gemeinsame Zeit.", credit:"Für Digital Business entwickelt · 2–4 Personen", language:"Sprache", player:"Spieler {n}", shortPlayer:"S{n}", animals:["Panda","Drache","Hund","Kaninchen"], round:"RUNDE {n} / {total}", winnerLabel:"★ Gewinner", outLabel:"Ausgeschieden", chairs:{one:"{n} Stuhl",other:"{n} Stühle"}, people:{one:"{n} Person",other:"{n} Personen"},
+ readyTitle:"Bereit zum Tanzen", readyDescription:"Versammelt euch und startet das Spiel.", readyStatus:"Wählt aus, wie viele Personen mitspielen.", start:"Spiel starten", replay:"Noch mal spielen", next:"Nächste Runde", repeatRound:"Runde wiederholen", running:"Die Runde läuft ♫", musicTitle:"Folge dem Rhythmus!", musicDescription:"Warte… die Musik kann jeden Moment stoppen.", musicStatus:"Drücke erst, wenn die Musik stoppt.", visualStatus:"Achte auf den Bildschirm: Warte auf „Hinsetzen!“.", audioError:"Kein Ton verfügbar: Achte auf „Hinsetzen!“.", stopTitle:"Hinsetzen!", stopDescription:"Drücke deine Taste. Jede Millisekunde zählt!", stopStatus:"Die Musik ist aus! Schnapp dir deinen Stuhl.", early:"Spieler {n}: noch nicht! Lass die Taste los und warte.", seated:"Spieler {n} hat einen Stuhl. Es sind noch Plätze frei!", eliminated:"Spieler {n} hat in Runde {round} keinen Stuhl bekommen.", winTitle:"Spieler {n} gewinnt!", winDescription:"Meisterhafter Reflex! Lust auf eine Revanche?", resultTitle:"Ein Stuhl weniger!", resultDescription:"Spieler {n} scheidet aus. Wir tanzen weiter.", pauseTitle:"Eine Pause für alle", pauseDescription:"Wiederholt die Runde, sobald alle bereit sind.", pauseStatus:"Runde beim Verlassen des Fensters abgebrochen. Niemand scheidet aus.", soundOn:"♫ Ton an", soundOff:"♫ Ton aus"
+ }
+};
+let language = "es-ES";
+try { const saved=localStorage.getItem("la-sillita-language"); if(translations[saved]) language=saved; } catch (_) {}
+const t = (key, params={}) => {
+ const text=translations[language][key];
+ if(typeof text!=="string") throw new Error("Missing translation: "+language+"/"+key);
+ return text.replace(/\{(\w+)\}/g,(_,name)=>String(params[name]??""));
+};
+const plural = (key,n) => {
+ const forms=translations[language][key],category=new Intl.PluralRules(language).select(n);
+ return (forms[category]||forms.other).replace("{n}",n);
+};
+let stageState={title:"readyTitle",description:"readyDescription",icon:"♫",params:{}};
+let statusState={key:"readyStatus",params:{}};
+let playState={key:"start",icon:"↗"};
+function setStatus(key,params={}) { statusState={key,params}; $("status").textContent=t(key,params); }
+function setPlay(key,icon="") { playState={key,icon}; $("play").replaceChildren(document.createTextNode(t(key))); if(icon){ const marker=document.createElement("span"); marker.textContent=icon; marker.setAttribute("aria-hidden","true"); $("play").append(marker); } }
+function translateStatic() {
+ document.documentElement.lang=language;document.title=t("title");
+ document.querySelectorAll("[data-i18n]").forEach(el=>el.textContent=t(el.dataset.i18n));
+ document.querySelector(".game-panel").setAttribute("aria-label",t("gameArea"));
+ document.querySelector(".count-selector").setAttribute("aria-label",t("countLabel"));
+ document.querySelector(".language-picker").setAttribute("aria-label",t("language"));
+ document.querySelectorAll("[data-language]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.language===language)));
+ $("sound").textContent=t(muted?"soundOff":"soundOn");
+ $("reset").textContent=t("replay");
+}
+function refreshLanguage() {
+ translateStatic();renderStats();renderRoster();
+ model.players.forEach(p=>{
+  const el=$("person-"+p.id);
+  el.querySelector(".creature").setAttribute("aria-label",translations[language].animals[p.id]);
+  el.querySelector(".player-tag").innerHTML="<kbd>"+labels[p.id]+"</kbd> "+t("shortPlayer",{n:p.id+1});
+ });
+ message(stageState.title,stageState.description,stageState.icon,stageState.params);
+ setStatus(statusState.key,statusState.params);setPlay(playState.key,playState.icon);
+}
+
+
 const model = new ChairGame(4);
 let count=4, roundTimer=null, audio=null, master=null, musicBus=null, beatTimer=null, noteIndex=0, busy=false, muted=false, stopAt=0;
 const melody=[72,76,79,76,74,77,81,77,72,76,79,84,83,79,77,74];
 const selectButtons=[...document.querySelectorAll("[data-count]")];
-function message(title,description,icon="♫") { $("stage-title").textContent=title; $("stage-description").textContent=description; $("stage-icon").textContent=icon; }
+function message(title,description,icon="♫",params={}) { stageState={title,description,icon,params}; $("stage-title").textContent=t(title,params); $("stage-description").textContent=t(description,params); $("stage-icon").textContent=icon; }
 function tone(midi,duration=.15,type="triangle",volume=.12,bus=master) {
  if(!audio || audio.state!=="running" || !bus) return;
  const oscillator=audio.createOscillator(), gain=audio.createGain(), now=audio.currentTime;
@@ -137,7 +210,7 @@ async function unlockAudio() {
   if(!audio){const Audio=window.AudioContext||window.webkitAudioContext;if(!Audio) throw Error("No disponible");audio=new Audio();master=audio.createGain();master.gain.value=muted?0:.65;master.connect(audio.destination);}
   if(audio.state!=="running") await audio.resume();
   return audio.state==="running";
- } catch (_) { $("status").textContent="Audio no disponible: sigue la señal visual «¡Siéntate!»."; return false; }
+ } catch (_) { setStatus("audioError"); return false; }
 }
 function endMusic() {
  clearInterval(beatTimer);beatTimer=null;
@@ -152,19 +225,22 @@ function music() {
 function stopRound() {
  if(!model.stopMusic())return;
  clearTimeout(roundTimer);endMusic();$("arena").classList.remove("dancing");$("arena").classList.add("stopped");
- message("¡Siéntate!","Pulsa tu tecla. ¡Cada milisegundo cuenta!","!");
- $("status").textContent="¡La música ha parado! Consigue tu silla.";renderStats();
+ message("stopTitle","stopDescription","!");
+ setStatus("stopStatus");renderStats();
 }
 function renderStats() {
  const alive=model.active.length;
  const available=(model.phase==="result"||model.phase==="finished")?0:Math.max(0,model.chairs-model.claims.length);
- $("remaining").textContent=available+" silla"+(available===1?"":"s")+" · "+alive+" personas";
- $("round").textContent=model.round ? "RONDA "+model.round+" / "+(count-1) : "PREPARA TU PARTIDA";
- $("scores").innerHTML=model.players.map(p=>'<div class="score-row '+(p.id===model.winner?"winner":"")+'"><span>Jugador '+(p.id+1)+'</span><span>'+(p.id===model.winner?"★ Ganador · ":!p.active?"Fuera · ":"")+p.seats+' silla'+(p.seats===1?"":"s")+'</span></div>').join("");
+ $("remaining").textContent=plural("chairs",available)+" · "+plural("people",alive);
+ $("round").textContent=model.round ? t("round",{n:model.round,total:count-1}) : t("prepare");
+ $("scores").innerHTML=model.players.map(p=>'<div class="score-row '+(p.id===model.winner?"winner":"")+'"><span>'+t("player",{n:p.id+1})+'</span><span>'+(p.id===model.winner?t("winnerLabel")+" · ":!p.active?t("outLabel")+" · ":"")+plural("chairs",p.seats)+'</span></div>').join("");
+}
+function renderRoster() {
+ $("roster").innerHTML=model.players.map(p=>'<div class="roster-row" style="--player:'+palette[p.id]+'"><span class="avatar" aria-hidden="true">'+animalSvg(p.id)+'</span><span>'+t("player",{n:p.id+1})+' <span class="animal-name">· '+translations[language].animals[p.id]+'</span></span><kbd>'+labels[p.id]+'</kbd></div>').join("");
 }
 function renderPeople() {
- $("roster").innerHTML=model.players.map(p=>'<div class="roster-row" style="--player:'+palette[p.id]+'"><span class="avatar" aria-hidden="true">'+animalSvg(p.id)+'</span><span>Jugador '+(p.id+1)+' <span class="animal-name">· '+animalNames[p.id]+'</span></span><kbd>'+labels[p.id]+'</kbd></div>').join("");
- $("characters").innerHTML=model.players.map(p=>'<div class="character" id="person-'+p.id+'" style="--player:'+palette[p.id]+';--delay:-'+p.id*.13+'s"><div class="creature" role="img" aria-label="'+animalNames[p.id]+'">'+animalSvg(p.id)+'</div><span class="player-tag"><kbd>'+labels[p.id]+'</kbd> J'+(p.id+1)+'</span></div>').join("");
+ renderRoster();
+ $("characters").innerHTML=model.players.map(p=>'<div class="character" id="person-'+p.id+'" style="--player:'+palette[p.id]+';--delay:-'+p.id*.13+'s"><div class="creature" role="img" aria-label="'+translations[language].animals[p.id]+'">'+animalSvg(p.id)+'</div><span class="player-tag"><kbd>'+labels[p.id]+'</kbd> '+t('shortPlayer',{n:p.id+1})+'</span></div>').join("");
 }
 function renderChairs() { $("chairs").innerHTML=Array.from({length:model.chairs},()=>'<div class="chair"><i></i></div>').join(""); }
 function positionPeople(time=0) {
@@ -183,8 +259,8 @@ function clearEffects(){clearTimeout(roundTimer);roundTimer=null;endMusic();$("a
 function resetGame(newCount=count) {
  clearEffects();count=newCount;model.reset(count);busy=false;
  selectButtons.forEach(b=>{const selected=Number(b.dataset.count)===count;b.classList.toggle("selected",selected);b.setAttribute("aria-pressed",String(selected));b.disabled=false;});
- renderPeople();renderChairs();positionPeople();renderStats();message("Todo listo para bailar","Reúne a tu equipo y dale al play.");
- $("status").textContent="Elige cuántas personas vais a jugar.";$("play").disabled=false;$("play").innerHTML="Empezar partida <span>↗</span>";$("reset").hidden=true;
+ renderPeople();renderChairs();positionPeople();renderStats();message("readyTitle","readyDescription");
+ setStatus("readyStatus");$("play").disabled=false;setPlay("start","↗");$("reset").hidden=true;
 }
 async function startRound() {
  if(busy||!["ready","result","paused"].includes(model.phase))return;
@@ -195,38 +271,38 @@ async function startRound() {
  if(!model.startRound())return;
  clearEffects();selectButtons.forEach(b=>b.disabled=true);
  renderChairs();positionPeople();renderStats();$("arena").classList.add("dancing");
- message("¡Sigue el ritmo!","Espera… la música puede parar en cualquier momento.");
- $("status").textContent=soundReady?"No pulses hasta que se detenga la música.":"Sigue la señal visual: espera a «¡Siéntate!»."; 
- $("play").innerHTML="La ronda está en marcha ♫";$("reset").hidden=false;
+ message("musicTitle","musicDescription");
+ setStatus(soundReady?"musicStatus":"visualStatus");
+ setPlay("running");$("reset").hidden=false;
  music();
  stopAt=performance.now()+4500+Math.random()*4500;
  roundTimer=setTimeout(stopRound,Math.max(0,stopAt-performance.now()));
 }
 function claim(id,repeat) {
  const result=model.press(id,repeat);
- if(result.type==="early"){$("status").textContent="Jugador "+(id+1)+": ¡todavía no! Suelta la tecla y espera.";return;}
+ if(result.type==="early"){setStatus("early",{n:id+1});return;}
  if(!["seat","elimination"].includes(result.type))return;
  const index=model.claims.indexOf(id),chair=$("chairs").children[index];
  if(chair){chair.classList.add("taken");chair.style.setProperty("--player",palette[id]);}
  positionPeople();renderStats();tone(80+index*3,.11,"sine",.11);
- if(result.type==="seat"){$("status").textContent="Jugador "+(id+1)+" ya tiene silla. ¡Aún queda sitio!";return;}
+ if(result.type==="seat"){setStatus("seated",{n:id+1});return;}
  clearEffects();positionPeople();
- $("status").textContent="Jugador "+(result.loser+1)+" se ha quedado sin silla en la ronda "+model.round+".";
+ setStatus("eliminated",{n:result.loser+1,round:model.round});
  if(model.phase==="finished"){
-  message("¡Gana el jugador "+(model.winner+1)+"!","Reflejos de campeón. ¿Os atrevéis con la revancha?","★");
-  $("play").disabled=false;$("play").innerHTML="Volver a jugar <span>↻</span>";$("reset").hidden=true;
+  message("winTitle","winDescription","★",{n:model.winner+1});
+  $("play").disabled=false;setPlay("replay","↻");$("reset").hidden=true;
   $("confetti").innerHTML=Array.from({length:32},(_,i)=>'<i class="confetto" style="--left:'+((i*37)%100)+'%;--color:'+palette[i%4]+';--duration:'+(2+i%4*.4)+'s;--delay:-'+(i%7*.3)+'s"></i>').join("");
  } else {
-  message("¡Una silla menos!","Jugador "+(result.loser+1)+" queda eliminado. Seguimos bailando.","↗");
-  $("play").disabled=false;$("play").innerHTML="Siguiente ronda <span>↗</span>";
+  message("resultTitle","resultDescription","↗",{n:result.loser+1});
+  $("play").disabled=false;setPlay("next","↗");
  }
 }
 selectButtons.forEach(b=>b.addEventListener("click",()=>{if(model.phase==="ready")resetGame(Number(b.dataset.count));}));
 $("play").addEventListener("click",()=>{if(model.phase==="finished"){resetGame();}else startRound();});
 $("reset").addEventListener("click",()=>resetGame());
-$("sound").addEventListener("click",async()=>{muted=!muted;if(master)master.gain.setValueAtTime(muted?0:.65,audio.currentTime);$("sound").textContent=muted?"♫ Sonido desactivado":"♫ Sonido activado";$("sound").setAttribute("aria-pressed",String(!muted));if(!muted)await unlockAudio();});
+$("sound").addEventListener("click",async()=>{muted=!muted;if(master)master.gain.setValueAtTime(muted?0:.65,audio.currentTime);$("sound").textContent=t(muted?"soundOff":"soundOn");$("sound").setAttribute("aria-pressed",String(!muted));if(!muted)await unlockAudio();});
 window.addEventListener("keydown",event=>{
- if(event.ctrlKey||event.metaKey||event.altKey)return;
+ if(event.ctrlKey||event.metaKey||event.altKey||event.target.closest(".language-picker"))return;
  let id=keys.indexOf(event.code);
  if(id<0)id=labels.indexOf(event.key.toUpperCase());
  if(id<0||id>=count)return;
@@ -238,13 +314,20 @@ window.addEventListener("keydown",event=>{
 window.addEventListener("keyup",event=>{let id=keys.indexOf(event.code);if(id<0)id=labels.indexOf(event.key.toUpperCase());model.release(id);});
 function suspendRound(){
  if(!model.pause()) {model.held.clear();return;}
- clearEffects();renderChairs();positionPeople();renderStats();message("Una pausa para todos","La ronda se repetirá cuando estéis preparados.","Ⅱ");
- $("status").textContent="Ronda anulada al salir de la ventana. Nadie queda eliminado.";
- $("play").disabled=false;$("play").innerHTML="Repetir ronda <span>↗</span>";
+ clearEffects();renderChairs();positionPeople();renderStats();message("pauseTitle","pauseDescription","Ⅱ");
+ setStatus("pauseStatus");
+ $("play").disabled=false;setPlay("repeatRound","↗");
 }
 document.addEventListener("visibilitychange",()=>{if(document.hidden)suspendRound();});
 window.addEventListener("blur",suspendRound);
-resetGame();requestAnimationFrame(animate);
+document.querySelectorAll("[data-language]").forEach(button=>button.addEventListener("click",()=>{
+ language=button.dataset.language;
+ try { localStorage.setItem("la-sillita-language",language); } catch (_) {}
+ refreshLanguage();
+ // Return keyboard focus to the game so assigned keys still work immediately.
+ button.blur();
+}));
+resetGame();refreshLanguage();requestAnimationFrame(animate);
 })();
 
 
