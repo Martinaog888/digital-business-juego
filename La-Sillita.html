@@ -38,6 +38,35 @@ header{height:auto;min-height:94px;flex-wrap:wrap;padding:18px 0;gap:16px}.cours
 
 h1>[data-i18n="headline"]{color:var(--ink)}
 
+/* Controles compartidos por ratón, teclado, lápiz y varios dedos. */
+.touch-controls{padding:18px 20px 22px;background:#faf7ff;border-top:1px solid #dfd4ee}
+.touch-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.touch-heading h2{font-size:13px;margin:0;letter-spacing:-.2px}
+#touch-prompt{font-size:11px;color:#84718e;line-height:1.5;text-align:right}
+.touch-buttons{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.touch-player{position:relative;min-width:0;min-height:116px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:3px;padding:9px 7px 10px;border:2px solid var(--player);border-radius:15px;background:white;color:#44324f;box-shadow:0 4px 0 color-mix(in srgb,var(--player),#8a758f 25%);touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.touch-player:disabled{opacity:.56}
+.touch-avatar{display:block;width:43px;height:51px;pointer-events:none}
+.touch-copy{display:flex;min-width:0;flex-direction:column;gap:3px;text-align:center;pointer-events:none}
+.touch-copy strong{font-size:12px}.touch-copy small{font-size:9px;line-height:1.3;color:#8d7c97}
+.touch-player kbd{position:absolute;right:7px;top:7px;font:700 9px ui-rounded,sans-serif;border:1px solid #e2dae9;border-radius:5px;padding:3px;background:#fbf9ff}
+.touch-go .touch-player:not(:disabled){background:color-mix(in srgb,var(--player) 17%,white);border-color:#8663b2}
+.touch-player.touch-held:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 #a38ab9}
+.touch-player.touch-seated{background:#edf8e2;border-color:#a4c784;opacity:.85}
+.touch-player.touch-out .animal-smile{display:none}.touch-player.touch-out .animal-sad{display:block}
+@media(max-width:1000px) and (min-width:741px){.touch-buttons{grid-template-columns:repeat(2,minmax(0,1fr))}.touch-player{min-height:82px;flex-direction:row;gap:7px}.touch-heading{flex-direction:column;gap:5px}#touch-prompt{text-align:center}}
+@media(max-width:740px){
+ .touch-controls{position:fixed;z-index:20;left:12px;right:12px;bottom:0;padding:11px 12px calc(12px + env(safe-area-inset-bottom));background:#faf7fff5;border:1px solid #ddd0ed;border-bottom:0;border-radius:20px 20px 0 0;box-shadow:0 -6px 28px #58417020}
+ .touch-heading{margin-bottom:8px;gap:8px}.touch-heading h2{font-size:11px}#touch-prompt{font-size:10px;max-width:63%}
+ .touch-buttons{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .touch-player{min-height:72px;flex-direction:row;justify-content:flex-start;padding:6px 24px 6px 7px;gap:5px;border-radius:12px}
+ .touch-avatar{width:37px;height:46px;flex-shrink:0}.touch-copy{text-align:left}.touch-copy strong{font-size:11px}.touch-copy small{font-size:9px}
+ .touch-player kbd{right:5px;top:6px;font-size:8px}
+ .app{padding-bottom:calc(240px + env(safe-area-inset-bottom))}
+}
+@media(prefers-reduced-motion:reduce){.touch-player{transition:none}}
+
+
 </style></head>
 <body>
 <div class="app">
@@ -54,6 +83,7 @@ h1>[data-i18n="headline"]{color:var(--ink)}
 <div id="confetti" aria-hidden="true"></div>
 </div>
 <div class="status-bar"><span id="status" role="status" aria-live="polite">Elige cuántas personas vais a jugar.</span><span id="remaining">3 sillas · 4 personas</span></div>
+<section id="touch-controls" class="touch-controls" aria-labelledby="touch-title"><div class="touch-heading"><h2 id="touch-title" data-i18n="touchTitle">Tu silla, a un toque</h2><span id="touch-prompt" role="status" aria-live="polite"></span></div><div id="touch-buttons" class="touch-buttons"></div></section>
 </section>
 <aside>
 <section class="card setup"><span class="eyebrow"><span data-i18n="setupEyebrow">QUE EMPIECE LA FIESTA</span></span><h2><span data-i18n="setupTitle">Vuestro próximo pique.</span></h2><label class="field-label"><span data-i18n="howMany">¿Cuántas personas jugáis?</span></label><div class="count-selector" role="group" aria-label="Número de participantes"><button data-count="2" aria-pressed="false">2</button><button data-count="3" aria-pressed="false">3</button><button data-count="4" aria-pressed="true" class="selected">4</button></div><div class="roster-heading"><span><span data-i18n="participant">PARTICIPANTE</span></span><span><span data-i18n="key">SU TECLA</span></span></div><div id="roster"></div><button id="play" class="primary">Empezar partida <span>↗</span></button><button id="reset" class="text-button" hidden>Volver a jugar</button><p class="local-note"><span data-i18n="localNote">Un ordenador. Un teclado. Mucho ritmo.</span></p></section>
@@ -134,24 +164,28 @@ function animalSvg(id) {
 
 const translations = {
  "es-ES": {
+ "touchTitle":"Tu silla, a un toque", "touchWait":"Espera a que pare la música…", "touchNow":"¡Ahora! Toca tu animal.", "touchReady":"Inicia la partida para jugar.", "touchPaused":"Repite la ronda para continuar.", "touchDone":"Ronda terminada.", "touchAbsent":"No participa", "touchSeated":"¡Silla conseguida!", "touchTap":"¡Toca aquí!", "touchWaitShort":"Espera…", "touchPlayer":"Jugador {n}: {animal}. Botón táctil o tecla {key}",
  title:"La Sillita · Sillas musicales", course:"DIGITAL BUSINESS · JUEGA EN COMPAÑÍA", eyebrow:"EL CLÁSICO, CON MÁS RITMO", headline:"Que no te quiten", accent:"tu sitio.", intro:"Música, reflejos y una silla de menos. ¿Quién se sienta primero?",
- gameArea:"Zona de juego", live:"SOLO PERSONAS, CERO BOTS", prepare:"PREPARA TU PARTIDA", setupEyebrow:"QUE EMPIECE LA FIESTA", setupTitle:"Vuestro próximo pique.", howMany:"¿Cuántas personas jugáis?", countLabel:"Número de participantes", participant:"PARTICIPANTE", key:"SU TECLA", localNote:"Un ordenador. Un teclado. Mucho ritmo.", scoreboard:"El marcador", thisGame:"ESTA PARTIDA", howTo:"ASÍ SE JUEGA", rulesTitle:"Oídos atentos. Dedos preparados.", rule1Title:"Sigue el ritmo", rule1:"Los personajes bailan mientras suena la música. ¡Todavía no pulses!", rule2Title:"¡Ahora, a la silla!", rule2:"Cuando pare la música y aparezca «¡Siéntate!», pulsa tu tecla una vez.", rule3Title:"Solo queda una persona", rule3:"Hay una silla menos por ronda. Quien se queda sin sitio sale de la partida.", fineprint:"Si te adelantas, suelta la tecla y vuelve a pulsar al parar la música. No vale mantenerla pulsada. Las pulsaciones se resuelven por orden de llegada al navegador. Si cambiáis de pestaña, la ronda se repite.", footer:"Un juego para compartir.", credit:"Hecho para Digital Business · 2–4 personas", language:"Idioma", player:"Jugador {n}", shortPlayer:"J{n}", animals:["Panda","Dragón","Perro","Conejo"], round:"RONDA {n} / {total}", winnerLabel:"★ Ganador", outLabel:"Fuera", chairs:{one:"{n} silla",other:"{n} sillas"}, people:{one:"{n} persona",other:"{n} personas"},
- readyTitle:"Todo listo para bailar", readyDescription:"Reúne a tu equipo y dale al play.", readyStatus:"Elige cuántas personas vais a jugar.", start:"Empezar partida", replay:"Volver a jugar", next:"Siguiente ronda", repeatRound:"Repetir ronda", running:"La ronda está en marcha ♫", musicTitle:"¡Sigue el ritmo!", musicDescription:"Espera… la música puede parar en cualquier momento.", musicStatus:"No pulses hasta que se detenga la música.", visualStatus:"Sigue la señal visual: espera a «¡Siéntate!».", audioError:"Audio no disponible: sigue la señal visual «¡Siéntate!».", stopTitle:"¡Siéntate!", stopDescription:"Pulsa tu tecla. ¡Cada milisegundo cuenta!", stopStatus:"¡La música ha parado! Consigue tu silla.", early:"Jugador {n}: ¡todavía no! Suelta la tecla y espera.", seated:"Jugador {n} ya tiene silla. ¡Aún queda sitio!", eliminated:"Jugador {n} se ha quedado sin silla en la ronda {round}.", winTitle:"¡Gana el jugador {n}!", winDescription:"Reflejos de campeón. ¿Os atrevéis con la revancha?", resultTitle:"¡Una silla menos!", resultDescription:"Jugador {n} queda eliminado. Seguimos bailando.", pauseTitle:"Una pausa para todos", pauseDescription:"La ronda se repetirá cuando estéis preparados.", pauseStatus:"Ronda anulada al salir de la ventana. Nadie queda eliminado.", soundOn:"♫ Sonido activado", soundOff:"♫ Sonido desactivado"
+ gameArea:"Zona de juego", live:"SOLO PERSONAS, CERO BOTS", prepare:"PREPARA TU PARTIDA", setupEyebrow:"QUE EMPIECE LA FIESTA", setupTitle:"Vuestro próximo pique.", howMany:"¿Cuántas personas jugáis?", countLabel:"Número de participantes", participant:"PARTICIPANTE", key:"SU TECLA", localNote:"Una pantalla. Teclas o toques. Mucho ritmo.", scoreboard:"El marcador", thisGame:"ESTA PARTIDA", howTo:"ASÍ SE JUEGA", rulesTitle:"Oídos atentos. Dedos preparados.", rule1Title:"Sigue el ritmo", rule1:"Los personajes bailan mientras suena la música. ¡Todavía no pulses ni toques!", rule2Title:"¡Ahora, a la silla!", rule2:"Cuando pare la música y aparezca «¡Siéntate!», toca el botón de tu animal o pulsa tu tecla una vez.", rule3Title:"Solo queda una persona", rule3:"Hay una silla menos por ronda. Quien se queda sin sitio sale de la partida.", fineprint:"Si te adelantas, suelta la tecla o levanta el dedo y vuelve a pulsar o tocar al parar la música. No vale mantenerlos pulsados. Las pulsaciones y los toques se resuelven por orden de llegada al navegador. Si cambiáis de pestaña, la ronda se repite.", footer:"Un juego para compartir.", credit:"Hecho para Digital Business · 2–4 personas", language:"Idioma", player:"Jugador {n}", shortPlayer:"J{n}", animals:["Panda","Dragón","Perro","Conejo"], round:"RONDA {n} / {total}", winnerLabel:"★ Ganador", outLabel:"Fuera", chairs:{one:"{n} silla",other:"{n} sillas"}, people:{one:"{n} persona",other:"{n} personas"},
+ readyTitle:"Todo listo para bailar", readyDescription:"Reúne a tu equipo y dale al play.", readyStatus:"Elige cuántas personas vais a jugar.", start:"Empezar partida", replay:"Volver a jugar", next:"Siguiente ronda", repeatRound:"Repetir ronda", running:"La ronda está en marcha ♫", musicTitle:"¡Sigue el ritmo!", musicDescription:"Espera… la música puede parar en cualquier momento.", musicStatus:"No pulses hasta que se detenga la música.", visualStatus:"Sigue la señal visual: espera a «¡Siéntate!».", audioError:"Audio no disponible: sigue la señal visual «¡Siéntate!».", stopTitle:"¡Siéntate!", stopDescription:"Toca tu animal o pulsa tu tecla. ¡Cada milisegundo cuenta!", stopStatus:"¡La música ha parado! Consigue tu silla.", early:"Jugador {n}: ¡todavía no! Suelta la tecla o levanta el dedo y espera.", seated:"Jugador {n} ya tiene silla. ¡Aún queda sitio!", eliminated:"Jugador {n} se ha quedado sin silla en la ronda {round}.", winTitle:"¡Gana el jugador {n}!", winDescription:"Reflejos de campeón. ¿Os atrevéis con la revancha?", resultTitle:"¡Una silla menos!", resultDescription:"Jugador {n} queda eliminado. Seguimos bailando.", pauseTitle:"Una pausa para todos", pauseDescription:"La ronda se repetirá cuando estéis preparados.", pauseStatus:"Ronda anulada al salir de la ventana. Nadie queda eliminado.", soundOn:"♫ Sonido activado", soundOff:"♫ Sonido desactivado"
  },
  "en-GB": {
+ "touchTitle":"Your seat is a tap away", "touchWait":"Wait for the music to stop…", "touchNow":"Now! Tap your animal.", "touchReady":"Start the game to play.", "touchPaused":"Replay the round to continue.", "touchDone":"Round finished.", "touchAbsent":"Not playing", "touchSeated":"Seat secured!", "touchTap":"Tap here!", "touchWaitShort":"Wait…", "touchPlayer":"Player {n}: {animal}. Touch button or {key} key",
  title:"La Sillita · Musical Chairs", course:"DIGITAL BUSINESS · PLAY TOGETHER", eyebrow:"THE CLASSIC, WITH MORE RHYTHM", headline:"Don't lose", accent:"your seat.", intro:"Music, quick reactions and one chair too few. Who will sit down first?",
- gameArea:"Play area", live:"REAL PEOPLE, NO BOTS", prepare:"GET READY TO PLAY", setupEyebrow:"LET THE PARTY BEGIN", setupTitle:"A little friendly competition.", howMany:"How many people are playing?", countLabel:"Number of players", participant:"PLAYER", key:"THEIR KEY", localNote:"One computer. One keyboard. Plenty of rhythm.", scoreboard:"Scoreboard", thisGame:"THIS GAME", howTo:"HOW TO PLAY", rulesTitle:"Ears open. Fingers ready.", rule1Title:"Follow the rhythm", rule1:"The animals dance while the music plays. Don't press your key yet!", rule2Title:"Grab a chair!", rule2:"When the music stops and “Sit down!” appears, press your key once.", rule3Title:"Last player standing", rule3:"There is one fewer chair than players in each round. Whoever misses out is eliminated.", fineprint:"If you press too early, release your key and press again once the music stops. Holding it down doesn't count. Key presses are processed in the order the browser receives them. Switching tabs restarts the round.", footer:"A game to share.", credit:"Made for Digital Business · 2–4 players", language:"Language", player:"Player {n}", shortPlayer:"P{n}", animals:["Panda","Dragon","Dog","Rabbit"], round:"ROUND {n} / {total}", winnerLabel:"★ Winner", outLabel:"Out", chairs:{one:"{n} chair",other:"{n} chairs"}, people:{one:"{n} player",other:"{n} players"},
- readyTitle:"Ready to dance", readyDescription:"Gather your friends and press play.", readyStatus:"Choose how many people are playing.", start:"Start game", replay:"Play again", next:"Next round", repeatRound:"Replay round", running:"Round in progress ♫", musicTitle:"Follow the rhythm!", musicDescription:"Wait… the music could stop at any moment.", musicStatus:"Don't press until the music stops.", visualStatus:"Watch the screen: wait for “Sit down!”.", audioError:"Audio unavailable: watch for the “Sit down!” message.", stopTitle:"Sit down!", stopDescription:"Press your key. Every millisecond counts!", stopStatus:"The music has stopped! Grab your chair.", early:"Player {n}: not yet! Release your key and wait.", seated:"Player {n} has a chair. There's still room!", eliminated:"Player {n} missed out on a chair in round {round}.", winTitle:"Player {n} wins!", winDescription:"Champion reactions! Fancy a rematch?", resultTitle:"One fewer chair!", resultDescription:"Player {n} is out. Let's keep dancing.", pauseTitle:"A break for everyone", pauseDescription:"Replay the round when everyone is ready.", pauseStatus:"Round cancelled after leaving the window. No one is eliminated.", soundOn:"♫ Sound on", soundOff:"♫ Sound off"
+ gameArea:"Play area", live:"REAL PEOPLE, NO BOTS", prepare:"GET READY TO PLAY", setupEyebrow:"LET THE PARTY BEGIN", setupTitle:"A little friendly competition.", howMany:"How many people are playing?", countLabel:"Number of players", participant:"PLAYER", key:"THEIR KEY", localNote:"One screen. Keys or taps. Plenty of rhythm.", scoreboard:"Scoreboard", thisGame:"THIS GAME", howTo:"HOW TO PLAY", rulesTitle:"Ears open. Fingers ready.", rule1Title:"Follow the rhythm", rule1:"The animals dance while the music plays. Don't press your key or tap yet!", rule2Title:"Grab a chair!", rule2:"When the music stops and “Sit down!” appears, tap your animal’s button or press your key once.", rule3Title:"Last player standing", rule3:"There is one fewer chair than players in each round. Whoever misses out is eliminated.", fineprint:"If you press or tap too early, release the key or lift your finger and try again once the music stops. Holding a key or button down doesn't count. Keys and taps are processed in the order the browser receives them. Switching tabs restarts the round.", footer:"A game to share.", credit:"Made for Digital Business · 2–4 players", language:"Language", player:"Player {n}", shortPlayer:"P{n}", animals:["Panda","Dragon","Dog","Rabbit"], round:"ROUND {n} / {total}", winnerLabel:"★ Winner", outLabel:"Out", chairs:{one:"{n} chair",other:"{n} chairs"}, people:{one:"{n} player",other:"{n} players"},
+ readyTitle:"Ready to dance", readyDescription:"Gather your friends and press play.", readyStatus:"Choose how many people are playing.", start:"Start game", replay:"Play again", next:"Next round", repeatRound:"Replay round", running:"Round in progress ♫", musicTitle:"Follow the rhythm!", musicDescription:"Wait… the music could stop at any moment.", musicStatus:"Don't press until the music stops.", visualStatus:"Watch the screen: wait for “Sit down!”.", audioError:"Audio unavailable: watch for the “Sit down!” message.", stopTitle:"Sit down!", stopDescription:"Tap your animal or press your key. Every millisecond counts!", stopStatus:"The music has stopped! Grab your chair.", early:"Player {n}: not yet! Release your key or lift your finger and wait.", seated:"Player {n} has a chair. There's still room!", eliminated:"Player {n} missed out on a chair in round {round}.", winTitle:"Player {n} wins!", winDescription:"Champion reactions! Fancy a rematch?", resultTitle:"One fewer chair!", resultDescription:"Player {n} is out. Let's keep dancing.", pauseTitle:"A break for everyone", pauseDescription:"Replay the round when everyone is ready.", pauseStatus:"Round cancelled after leaving the window. No one is eliminated.", soundOn:"♫ Sound on", soundOff:"♫ Sound off"
  },
  "pl-PL": {
+ "touchTitle":"Krzesło na wyciągnięcie palca", "touchWait":"Poczekaj, aż muzyka ucichnie…", "touchNow":"Teraz! Dotknij swojego zwierzątka.", "touchReady":"Rozpocznij grę, aby zagrać.", "touchPaused":"Powtórz rundę, aby kontynuować.", "touchDone":"Koniec rundy.", "touchAbsent":"Nie bierze udziału", "touchSeated":"Krzesło zajęte!", "touchTap":"Dotknij tutaj!", "touchWaitShort":"Czekaj…", "touchPlayer":"Gracz {n}: {animal}. Przycisk dotykowy lub klawisz {key}",
  title:"La Sillita · Muzyczne krzesła", course:"DIGITAL BUSINESS · GRAJCIE RAZEM", eyebrow:"KLASYCZNA GRA W NOWYM RYTMIE", headline:"Nie daj sobie zabrać", accent:"miejsca.", intro:"Muzyka, refleks i o jedno krzesło za mało. Kto usiądzie pierwszy?",
- gameArea:"Plansza gry", live:"TYLKO LUDZIE, ŻADNYCH BOTÓW", prepare:"PRZYGOTUJCIE SIĘ DO GRY", setupEyebrow:"NIECH ZACZNIE SIĘ ZABAWA", setupTitle:"Czas na przyjazną rywalizację.", howMany:"Ile osób gra?", countLabel:"Liczba graczy", participant:"GRACZ", key:"KLAWISZ", localNote:"Jeden komputer. Jedna klawiatura. Mnóstwo rytmu.", scoreboard:"Wyniki", thisGame:"TA ROZGRYWKA", howTo:"JAK GRAĆ", rulesTitle:"Nadstawcie uszu. Przygotujcie palce.", rule1Title:"Poczuj rytm", rule1:"Zwierzątka tańczą, gdy gra muzyka. Jeszcze nie naciskaj klawisza!", rule2Title:"Zajmij krzesło!", rule2:"Gdy muzyka ucichnie i pojawi się napis „Siadaj!”, naciśnij swój klawisz jeden raz.", rule3Title:"Zostaje jedna osoba", rule3:"W każdej rundzie jest o jedno krzesło mniej niż graczy. Osoba bez miejsca odpada.", fineprint:"Jeśli naciśniesz za wcześnie, puść klawisz i naciśnij go ponownie, gdy muzyka ucichnie. Przytrzymywanie klawisza się nie liczy. Liczy się kolejność, w jakiej przeglądarka odbierze naciśnięcia. Po zmianie karty runda zostanie powtórzona.", footer:"Gra do wspólnej zabawy.", credit:"Projekt na zajęcia Digital Business · 2–4 graczy", language:"Język", player:"Gracz {n}", shortPlayer:"G{n}", animals:["Panda","Smok","Pies","Królik"], round:"RUNDA {n} / {total}", winnerLabel:"★ Zwycięzca", outLabel:"Poza grą", chairs:{one:"{n} krzesło",few:"{n} krzesła",many:"{n} krzeseł",other:"{n} krzesła"}, people:{one:"{n} gracz",few:"{n} graczy",many:"{n} graczy",other:"{n} gracza"},
- readyTitle:"Gotowi do tańca", readyDescription:"Zbierz znajomych i rozpocznij grę.", readyStatus:"Wybierz liczbę graczy.", start:"Rozpocznij grę", replay:"Zagraj ponownie", next:"Następna runda", repeatRound:"Powtórz rundę", running:"Runda w toku ♫", musicTitle:"Poczuj rytm!", musicDescription:"Czekaj… muzyka może ucichnąć w każdej chwili.", musicStatus:"Nie naciskaj, dopóki muzyka nie ucichnie.", visualStatus:"Patrz na ekran: poczekaj na napis „Siadaj!”.", audioError:"Dźwięk niedostępny: czekaj na napis „Siadaj!”.", stopTitle:"Siadaj!", stopDescription:"Naciśnij swój klawisz. Liczy się każda milisekunda!", stopStatus:"Muzyka ucichła! Zajmij krzesło.", early:"Gracz {n}: jeszcze nie! Puść klawisz i poczekaj.", seated:"Gracz {n} ma już krzesło. Są jeszcze wolne miejsca!", eliminated:"Gracz {n} nie zajął krzesła w rundzie {round}.", winTitle:"Wygrywa gracz {n}!", winDescription:"Mistrzowski refleks! Czas na rewanż?", resultTitle:"O jedno krzesło mniej!", resultDescription:"Gracz {n} odpada. Tańczymy dalej.", pauseTitle:"Przerwa dla wszystkich", pauseDescription:"Powtórzcie rundę, gdy wszyscy będą gotowi.", pauseStatus:"Runda anulowana po opuszczeniu okna. Nikt nie odpada.", soundOn:"♫ Dźwięk włączony", soundOff:"♫ Dźwięk wyłączony"
+ gameArea:"Plansza gry", live:"TYLKO LUDZIE, ŻADNYCH BOTÓW", prepare:"PRZYGOTUJCIE SIĘ DO GRY", setupEyebrow:"NIECH ZACZNIE SIĘ ZABAWA", setupTitle:"Czas na przyjazną rywalizację.", howMany:"Ile osób gra?", countLabel:"Liczba graczy", participant:"GRACZ", key:"KLAWISZ", localNote:"Jeden ekran. Klawisze lub dotyk. Mnóstwo rytmu.", scoreboard:"Wyniki", thisGame:"TA ROZGRYWKA", howTo:"JAK GRAĆ", rulesTitle:"Nadstawcie uszu. Przygotujcie palce.", rule1Title:"Poczuj rytm", rule1:"Zwierzątka tańczą, gdy gra muzyka. Jeszcze nie naciskaj klawisza ani przycisku!", rule2Title:"Zajmij krzesło!", rule2:"Gdy muzyka ucichnie i pojawi się napis „Siadaj!”, dotknij przycisku swojego zwierzątka lub naciśnij swój klawisz jeden raz.", rule3Title:"Zostaje jedna osoba", rule3:"W każdej rundzie jest o jedno krzesło mniej niż graczy. Osoba bez miejsca odpada.", fineprint:"Jeśli naciśniesz za wcześnie, puść klawisz lub podnieś palec i spróbuj ponownie, gdy muzyka ucichnie. Przytrzymywanie klawisza lub przycisku się nie liczy. Liczy się kolejność, w jakiej przeglądarka odbierze naciśnięcia i dotknięcia. Po zmianie karty runda zostanie powtórzona.", footer:"Gra do wspólnej zabawy.", credit:"Projekt na zajęcia Digital Business · 2–4 graczy", language:"Język", player:"Gracz {n}", shortPlayer:"G{n}", animals:["Panda","Smok","Pies","Królik"], round:"RUNDA {n} / {total}", winnerLabel:"★ Zwycięzca", outLabel:"Poza grą", chairs:{one:"{n} krzesło",few:"{n} krzesła",many:"{n} krzeseł",other:"{n} krzesła"}, people:{one:"{n} gracz",few:"{n} graczy",many:"{n} graczy",other:"{n} gracza"},
+ readyTitle:"Gotowi do tańca", readyDescription:"Zbierz znajomych i rozpocznij grę.", readyStatus:"Wybierz liczbę graczy.", start:"Rozpocznij grę", replay:"Zagraj ponownie", next:"Następna runda", repeatRound:"Powtórz rundę", running:"Runda w toku ♫", musicTitle:"Poczuj rytm!", musicDescription:"Czekaj… muzyka może ucichnąć w każdej chwili.", musicStatus:"Nie naciskaj, dopóki muzyka nie ucichnie.", visualStatus:"Patrz na ekran: poczekaj na napis „Siadaj!”.", audioError:"Dźwięk niedostępny: czekaj na napis „Siadaj!”.", stopTitle:"Siadaj!", stopDescription:"Dotknij swojego zwierzątka lub naciśnij klawisz. Liczy się każda milisekunda!", stopStatus:"Muzyka ucichła! Zajmij krzesło.", early:"Gracz {n}: jeszcze nie! Puść klawisz lub podnieś palec i poczekaj.", seated:"Gracz {n} ma już krzesło. Są jeszcze wolne miejsca!", eliminated:"Gracz {n} nie zajął krzesła w rundzie {round}.", winTitle:"Wygrywa gracz {n}!", winDescription:"Mistrzowski refleks! Czas na rewanż?", resultTitle:"O jedno krzesło mniej!", resultDescription:"Gracz {n} odpada. Tańczymy dalej.", pauseTitle:"Przerwa dla wszystkich", pauseDescription:"Powtórzcie rundę, gdy wszyscy będą gotowi.", pauseStatus:"Runda anulowana po opuszczeniu okna. Nikt nie odpada.", soundOn:"♫ Dźwięk włączony", soundOff:"♫ Dźwięk wyłączony"
  },
  "de-DE": {
+ "touchTitle":"Ein Fingertipp zum Sitzplatz", "touchWait":"Warte, bis die Musik stoppt…", "touchNow":"Jetzt! Tippe auf dein Tier.", "touchReady":"Starte das Spiel, um mitzuspielen.", "touchPaused":"Wiederhole die Runde, um fortzufahren.", "touchDone":"Runde beendet.", "touchAbsent":"Spielt nicht mit", "touchSeated":"Stuhl gesichert!", "touchTap":"Hier tippen!", "touchWaitShort":"Warte…", "touchPlayer":"Spieler {n}: {animal}. Touch-Schaltfläche oder Taste {key}",
  title:"La Sillita · Reise nach Jerusalem", course:"DIGITAL BUSINESS · GEMEINSAM SPIELEN", eyebrow:"DER KLASSIKER MIT MEHR RHYTHMUS", headline:"Sichere dir", accent:"deinen Platz.", intro:"Musik, schnelle Reaktionen und ein Stuhl zu wenig. Wer sitzt zuerst?",
- gameArea:"Spielfeld", live:"NUR MENSCHEN, KEINE BOTS", prepare:"MACHT EUCH BEREIT", setupEyebrow:"DIE PARTY KANN BEGINNEN", setupTitle:"Zeit für ein kleines Duell.", howMany:"Wie viele Personen spielen mit?", countLabel:"Anzahl der Mitspielenden", participant:"SPIELER", key:"TASTE", localNote:"Ein Computer. Eine Tastatur. Jede Menge Rhythmus.", scoreboard:"Punktestand", thisGame:"DIESES SPIEL", howTo:"SO WIRD GESPIELT", rulesTitle:"Ohren auf. Finger bereit.", rule1Title:"Folge dem Rhythmus", rule1:"Die Tiere tanzen, solange die Musik läuft. Drücke deine Taste noch nicht!", rule2Title:"Schnapp dir einen Stuhl!", rule2:"Sobald die Musik stoppt und „Hinsetzen!“ erscheint, drücke deine Taste einmal.", rule3Title:"Eine Person gewinnt", rule3:"In jeder Runde gibt es einen Stuhl weniger als Mitspielende. Wer keinen Platz bekommt, scheidet aus.", fineprint:"Wenn du zu früh drückst, lass die Taste los und drücke erneut, sobald die Musik stoppt. Gedrückthalten zählt nicht. Entscheidend ist die Reihenfolge, in der die Tastendrücke beim Browser ankommen. Beim Wechseln des Tabs wird die Runde wiederholt.", footer:"Ein Spiel für gemeinsame Zeit.", credit:"Für Digital Business entwickelt · 2–4 Personen", language:"Sprache", player:"Spieler {n}", shortPlayer:"S{n}", animals:["Panda","Drache","Hund","Kaninchen"], round:"RUNDE {n} / {total}", winnerLabel:"★ Gewinner", outLabel:"Ausgeschieden", chairs:{one:"{n} Stuhl",other:"{n} Stühle"}, people:{one:"{n} Person",other:"{n} Personen"},
- readyTitle:"Bereit zum Tanzen", readyDescription:"Versammelt euch und startet das Spiel.", readyStatus:"Wählt aus, wie viele Personen mitspielen.", start:"Spiel starten", replay:"Noch mal spielen", next:"Nächste Runde", repeatRound:"Runde wiederholen", running:"Die Runde läuft ♫", musicTitle:"Folge dem Rhythmus!", musicDescription:"Warte… die Musik kann jeden Moment stoppen.", musicStatus:"Drücke erst, wenn die Musik stoppt.", visualStatus:"Achte auf den Bildschirm: Warte auf „Hinsetzen!“.", audioError:"Kein Ton verfügbar: Achte auf „Hinsetzen!“.", stopTitle:"Hinsetzen!", stopDescription:"Drücke deine Taste. Jede Millisekunde zählt!", stopStatus:"Die Musik ist aus! Schnapp dir deinen Stuhl.", early:"Spieler {n}: noch nicht! Lass die Taste los und warte.", seated:"Spieler {n} hat einen Stuhl. Es sind noch Plätze frei!", eliminated:"Spieler {n} hat in Runde {round} keinen Stuhl bekommen.", winTitle:"Spieler {n} gewinnt!", winDescription:"Meisterhafter Reflex! Lust auf eine Revanche?", resultTitle:"Ein Stuhl weniger!", resultDescription:"Spieler {n} scheidet aus. Wir tanzen weiter.", pauseTitle:"Eine Pause für alle", pauseDescription:"Wiederholt die Runde, sobald alle bereit sind.", pauseStatus:"Runde beim Verlassen des Fensters abgebrochen. Niemand scheidet aus.", soundOn:"♫ Ton an", soundOff:"♫ Ton aus"
+ gameArea:"Spielfeld", live:"NUR MENSCHEN, KEINE BOTS", prepare:"MACHT EUCH BEREIT", setupEyebrow:"DIE PARTY KANN BEGINNEN", setupTitle:"Zeit für ein kleines Duell.", howMany:"Wie viele Personen spielen mit?", countLabel:"Anzahl der Mitspielenden", participant:"SPIELER", key:"TASTE", localNote:"Ein Bildschirm. Tastatur oder Touch. Jede Menge Rhythmus.", scoreboard:"Punktestand", thisGame:"DIESES SPIEL", howTo:"SO WIRD GESPIELT", rulesTitle:"Ohren auf. Finger bereit.", rule1Title:"Folge dem Rhythmus", rule1:"Die Tiere tanzen, solange die Musik läuft. Drücke noch keine Taste und tippe noch nicht!", rule2Title:"Schnapp dir einen Stuhl!", rule2:"Sobald die Musik stoppt und „Hinsetzen!“ erscheint, tippe einmal auf die Schaltfläche deines Tiers oder drücke deine Taste.", rule3Title:"Eine Person gewinnt", rule3:"In jeder Runde gibt es einen Stuhl weniger als Mitspielende. Wer keinen Platz bekommt, scheidet aus.", fineprint:"Wenn du zu früh drückst oder tippst, lass die Taste los oder hebe den Finger und versuche es erneut, sobald die Musik stoppt. Gedrückthalten zählt nicht. Entscheidend ist die Reihenfolge, in der Tastendrücke und Berührungen beim Browser ankommen. Beim Wechseln des Tabs wird die Runde wiederholt.", footer:"Ein Spiel für gemeinsame Zeit.", credit:"Für Digital Business entwickelt · 2–4 Personen", language:"Sprache", player:"Spieler {n}", shortPlayer:"S{n}", animals:["Panda","Drache","Hund","Kaninchen"], round:"RUNDE {n} / {total}", winnerLabel:"★ Gewinner", outLabel:"Ausgeschieden", chairs:{one:"{n} Stuhl",other:"{n} Stühle"}, people:{one:"{n} Person",other:"{n} Personen"},
+ readyTitle:"Bereit zum Tanzen", readyDescription:"Versammelt euch und startet das Spiel.", readyStatus:"Wählt aus, wie viele Personen mitspielen.", start:"Spiel starten", replay:"Noch mal spielen", next:"Nächste Runde", repeatRound:"Runde wiederholen", running:"Die Runde läuft ♫", musicTitle:"Folge dem Rhythmus!", musicDescription:"Warte… die Musik kann jeden Moment stoppen.", musicStatus:"Drücke erst, wenn die Musik stoppt.", visualStatus:"Achte auf den Bildschirm: Warte auf „Hinsetzen!“.", audioError:"Kein Ton verfügbar: Achte auf „Hinsetzen!“.", stopTitle:"Hinsetzen!", stopDescription:"Tippe auf dein Tier oder drücke deine Taste. Jede Millisekunde zählt!", stopStatus:"Die Musik ist aus! Schnapp dir deinen Stuhl.", early:"Spieler {n}: noch nicht! Lass die Taste los oder hebe den Finger und warte.", seated:"Spieler {n} hat einen Stuhl. Es sind noch Plätze frei!", eliminated:"Spieler {n} hat in Runde {round} keinen Stuhl bekommen.", winTitle:"Spieler {n} gewinnt!", winDescription:"Meisterhafter Reflex! Lust auf eine Revanche?", resultTitle:"Ein Stuhl weniger!", resultDescription:"Spieler {n} scheidet aus. Wir tanzen weiter.", pauseTitle:"Eine Pause für alle", pauseDescription:"Wiederholt die Runde, sobald alle bereit sind.", pauseStatus:"Runde beim Verlassen des Fensters abgebrochen. Niemand scheidet aus.", soundOn:"♫ Ton an", soundOff:"♫ Ton aus"
  }
 };
 let language = "es-ES";
@@ -197,6 +231,73 @@ let count=4, roundTimer=null, audio=null, master=null, musicBus=null, beatTimer=
 const melody=[72,76,79,76,74,77,81,77,72,76,79,84,83,79,77,74];
 const selectButtons=[...document.querySelectorAll("[data-count]")];
 function message(title,description,icon="♫",params={}) { stageState={title,description,icon,params}; $("stage-title").textContent=t(title,params); $("stage-description").textContent=t(description,params); $("stage-icon").textContent=icon; }
+// Pointer Events admiten varios dedos; teclado y tacto comparten las mismas reglas.
+const activeInputs=Array.from({length:4},()=>new Set());
+const pointerOwners=new Map();
+function createTouchControls(){
+ $("touch-buttons").innerHTML=palette.map((colour,id)=>'<button type="button" class="touch-player" data-touch-player="'+id+'" style="--player:'+colour+'" disabled><span class="touch-avatar" aria-hidden="true">'+animalSvg(id)+'</span><span class="touch-copy"><strong></strong><small></small></span><kbd>'+labels[id]+'</kbd></button>').join("");
+ document.querySelectorAll("[data-touch-player]").forEach(button=>{
+  const id=Number(button.dataset.touchPlayer);
+  button.addEventListener("pointerdown",event=>{
+   if(button.disabled||event.button!==0)return;
+   event.preventDefault();
+   pointerOwners.set(event.pointerId,id);
+   try{button.setPointerCapture(event.pointerId);}catch(_){}
+   inputDown(id,"pointer:"+event.pointerId);
+  });
+  // Activación por lector de pantalla o Enter/Espacio; no duplica el clic de un toque.
+  button.addEventListener("click",event=>{
+   if(event.detail!==0||button.disabled)return;
+   inputDown(id,"accessible");inputUp(id,"accessible");
+  });
+  button.addEventListener("contextmenu",event=>event.preventDefault());
+ });
+}
+function updateTouchControls(){
+ if(!$("touch-buttons").children.length)return;
+ const playable=["music","claim"].includes(model.phase);
+ $("touch-prompt").textContent=t(model.phase==="music"?"touchWait":model.phase==="claim"?"touchNow":model.phase==="ready"?"touchReady":model.phase==="paused"?"touchPaused":"touchDone");
+ $("touch-controls").classList.toggle("touch-go",model.phase==="claim");
+ document.querySelectorAll("[data-touch-player]").forEach(button=>{
+  const id=Number(button.dataset.touchPlayer),player=model.players[id],seated=model.claims.includes(id);
+  const state=!player?"touchAbsent":!player.active?"outLabel":seated?"touchSeated":model.phase==="claim"?"touchTap":"touchWaitShort";
+  button.querySelector("strong").textContent=translations[language].animals[id];
+  button.querySelector("small").textContent=t(state);
+  button.setAttribute("aria-label",t("touchPlayer",{n:id+1,animal:translations[language].animals[id],key:labels[id]})+". "+t(state));
+  button.disabled=!player||!player.active||!playable||seated;
+  button.classList.toggle("touch-seated",seated);
+  button.classList.toggle("touch-out",Boolean(player&&!player.active));
+  button.classList.toggle("touch-held",activeInputs[id].size>0);
+ });
+}
+function inputDown(id,source,repeat=false){
+ if(repeat||activeInputs[id].has(source))return;
+ const wasHeld=activeInputs[id].size>0;
+ activeInputs[id].add(source);
+ if(!wasHeld){
+  if(model.phase==="music"&&performance.now()>=stopAt)stopRound();
+  claim(id,false);
+ }
+ updateTouchControls();
+}
+function inputUp(id,source){
+ activeInputs[id].delete(source);
+ if(activeInputs[id].size===0)model.release(id);
+ updateTouchControls();
+}
+function releasePointer(event){
+ const id=pointerOwners.get(event.pointerId);
+ if(id===undefined)return;
+ pointerOwners.delete(event.pointerId);inputUp(id,"pointer:"+event.pointerId);
+}
+function clearInputs(){
+ pointerOwners.clear();activeInputs.forEach(sources=>sources.clear());model.held.clear();
+}
+window.addEventListener("pointerup",releasePointer);
+window.addEventListener("pointercancel",releasePointer);
+window.addEventListener("lostpointercapture",releasePointer);
+
+
 function tone(midi,duration=.15,type="triangle",volume=.12,bus=master) {
  if(!audio || audio.state!=="running" || !bus) return;
  const oscillator=audio.createOscillator(), gain=audio.createGain(), now=audio.currentTime;
@@ -229,6 +330,7 @@ function stopRound() {
  setStatus("stopStatus");renderStats();
 }
 function renderStats() {
+ updateTouchControls();
  const alive=model.active.length;
  const available=(model.phase==="result"||model.phase==="finished")?0:Math.max(0,model.chairs-model.claims.length);
  $("remaining").textContent=plural("chairs",available)+" · "+plural("people",alive);
@@ -257,7 +359,7 @@ function positionPeople(time=0) {
 function animate(time){if(model.phase==="music") positionPeople(time);requestAnimationFrame(animate);}
 function clearEffects(){clearTimeout(roundTimer);roundTimer=null;endMusic();$("arena").classList.remove("dancing","stopped");$("confetti").innerHTML="";}
 function resetGame(newCount=count) {
- clearEffects();count=newCount;model.reset(count);busy=false;
+ clearEffects();clearInputs();count=newCount;model.reset(count);busy=false;
  selectButtons.forEach(b=>{const selected=Number(b.dataset.count)===count;b.classList.toggle("selected",selected);b.setAttribute("aria-pressed",String(selected));b.disabled=false;});
  renderPeople();renderChairs();positionPeople();renderStats();message("readyTitle","readyDescription");
  setStatus("readyStatus");$("play").disabled=false;setPlay("start","↗");$("reset").hidden=true;
@@ -307,12 +409,11 @@ window.addEventListener("keydown",event=>{
  if(id<0)id=labels.indexOf(event.key.toUpperCase());
  if(id<0||id>=count)return;
  event.preventDefault();
- // Si el hilo del navegador se ha retrasado, primero se aplica la parada pendiente.
- if(model.phase==="music"&&performance.now()>=stopAt)stopRound();
- claim(id,event.repeat);
+ inputDown(id,"keyboard",event.repeat);
 });
-window.addEventListener("keyup",event=>{let id=keys.indexOf(event.code);if(id<0)id=labels.indexOf(event.key.toUpperCase());model.release(id);});
+window.addEventListener("keyup",event=>{let id=keys.indexOf(event.code);if(id<0)id=labels.indexOf(event.key.toUpperCase());if(id>=0)inputUp(id,"keyboard");});
 function suspendRound(){
+ clearInputs();
  if(!model.pause()) {model.held.clear();return;}
  clearEffects();renderChairs();positionPeople();renderStats();message("pauseTitle","pauseDescription","Ⅱ");
  setStatus("pauseStatus");
@@ -327,7 +428,7 @@ document.querySelectorAll("[data-language]").forEach(button=>button.addEventList
  // Return keyboard focus to the game so assigned keys still work immediately.
  button.blur();
 }));
-resetGame();refreshLanguage();requestAnimationFrame(animate);
+createTouchControls();resetGame();refreshLanguage();requestAnimationFrame(animate);
 })();
 
 
