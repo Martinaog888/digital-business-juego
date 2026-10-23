@@ -1,0 +1,16 @@
+{
+  "name": "la-sillita",
+  "private": true,
+  "scripts": {
+    "dev": "python3 -m http.server 4173 --bind 127.0.0.1 --directory output",
+    "build": "python3 scripts/build.py",
+    "test": "node --test tests/room.test.mjs",
+    "test:browser": "node tests/local-browser.cjs",
+    "test:online": "node tests/online-browser.cjs",
+    "server:dev": "wrangler dev --local --ip 127.0.0.1 --port 8787 --var ALLOWED_ORIGIN:http://127.0.0.1:4173"
+  },
+  "devDependencies": {
+    "playwright": "^1.64.1",
+    "wrangler": "^4.152.0"
+  }
+}

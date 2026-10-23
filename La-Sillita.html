@@ -67,13 +67,45 @@ h1>[data-i18n="headline"]{color:var(--ink)}
 @media(prefers-reduced-motion:reduce){.touch-player{transition:none}}
 
 
+.mode-menu{padding:10px 0 32px}.mode-menu h2{font-size:26px;letter-spacing:-.7px;margin:12px 0 22px}
+.mode-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.mode-cards button{text-align:left;border:1px solid #e3d8ed;background:white;border-radius:21px;padding:25px;color:var(--ink);box-shadow:0 5px 0 #eae1f3;display:flex;flex-direction:column;gap:13px;min-width:0;transition:transform .15s}
+.mode-cards button:hover{transform:translateY(-3px);border-color:#a283d4}.mode-cards button:nth-child(2){background:#f2f9ea}.mode-cards button:nth-child(3){background:#f2ebff}
+.mode-icon{font-size:31px}.mode-cards strong{font-size:18px;line-height:1.4}.mode-cards small{font-size:12px;color:#8b7898;line-height:1.7}
+.menu-back{border:1px solid #ded3e9;background:#fffafc;color:#7952a0;border-radius:10px;padding:10px 15px;margin:0 0 15px;font-size:12px}
+.mode-settings{margin:0 0 22px}.mode-settings h2{margin:0 0 18px;font-size:21px}.profile-editor{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-bottom:12px}
+#profile-settings{display:grid;grid-template-columns:1fr 1fr;gap:15px}.mode-settings label{font-size:12px;line-height:1.7;color:#857090;display:flex;flex-direction:column;gap:5px;min-width:0}
+.mode-settings input,.mode-settings select{min-width:0;width:100%;font:inherit;color:var(--ink);background:#fcf9ff;border:1px solid #ddd1e8;border-radius:9px;padding:11px 12px}
+.mode-settings input:focus,.mode-settings select:focus{outline:2px solid #ac8edc;outline-offset:2px}
+#difficulty-setting{max-width:280px}.muted-note{font-size:11px;line-height:1.8;color:#91829e;margin:10px 0}
+.online-warning{background:#fff3cf;border:1px solid #ead8a9;border-radius:12px;padding:14px;font-size:12px;line-height:1.8}.online-warning a{color:#7952a0}
+.online-form{max-width:530px}.join-row{display:flex;gap:12px;align-items:end;margin:20px 0}.join-row label{flex:1}.join-row button{border:0;background:#7952db;color:white;border-radius:9px;padding:13px 24px}
+#online-notice{font-size:12px;line-height:1.7;color:#9d5079}#online-lobby{max-width:700px}
+#lobby-players{list-style:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}#lobby-players li{display:flex;gap:10px;align-items:center;background:#f7f2fb;border-radius:12px;padding:10px;min-width:0}
+#lobby-players strong{display:block;font-size:13px;overflow-wrap:anywhere}#lobby-players small{display:block;font-size:10px;line-height:1.7;color:#95849e}
+.lobby-animal{display:block;width:40px;height:50px;flex-shrink:0}.room-code{font-size:14px;padding:15px;background:#ede4fa;border-radius:12px;margin:10px 0}.room-code strong{letter-spacing:3px;color:#7952db;margin-left:10px}
+#online-lobby .menu-back{margin-top:12px}.player-tag{max-width:108px;overflow:hidden;text-overflow:ellipsis}.roster-row>span:nth-child(2),.score-row>span:first-child{overflow-wrap:anywhere;min-width:0}.touch-copy strong{overflow-wrap:anywhere}
+.single-control .touch-buttons{grid-template-columns:1fr}.single-control .touch-player{min-height:94px;flex-direction:row;gap:16px}.single-control .touch-copy strong{font-size:16px}
+body.menu-open .app{padding-bottom:0}
+@media(max-width:740px){
+ .mode-cards{grid-template-columns:1fr;gap:14px}.mode-cards button{padding:20px;gap:9px}.mode-cards strong{font-size:17px}.mode-menu h2{font-size:23px}
+ #profile-settings{grid-template-columns:1fr;gap:8px}.profile-editor{gap:10px}#lobby-players{grid-template-columns:1fr}
+ .mode-settings{padding:17px}.single-control .touch-player{min-height:76px}.single-control .touch-heading h2{font-size:12px}
+ body.menu-open #touch-controls{display:none}.online-warning{padding:12px;font-size:11px}
+}
+
 </style></head>
 <body>
 <div class="app">
 <header><a class="brand" href="La-Sillita.html"><span class="brand-icon">♫</span> la sillita<span class="dot">.</span></a><div class="course"><span data-i18n="course">DIGITAL BUSINESS · JUEGA EN COMPAÑÍA</span></div><nav class="language-picker" aria-label="Idioma"><span class="language-caption" data-i18n="language">Idioma</span><div class="language-options"><button type="button" data-language="en-GB" lang="en-GB" aria-pressed="false">🇬🇧 English</button><button type="button" data-language="es-ES" lang="es-ES" aria-pressed="true">🇪🇸 Español</button><button type="button" data-language="pl-PL" lang="pl-PL" aria-pressed="false">🇵🇱 Polski</button><button type="button" data-language="de-DE" lang="de-DE" aria-pressed="false">🇩🇪 Deutsch</button></div></nav><button id="sound" class="icon-button" aria-pressed="true">♫ Sonido activado</button></header>
 <main>
 <div class="intro"><span class="eyebrow"><span data-i18n="eyebrow">EL CLÁSICO, CON MÁS RITMO</span></span><h1><span data-i18n="headline">Que no te quiten</span> <span><span data-i18n="accent">tu sitio.</span></span></h1><p><span data-i18n="intro">Música, reflejos y una silla de menos. ¿Quién se sienta primero?</span></p></div>
-<div class="layout">
+<section id="mode-menu" class="mode-menu"><span class="eyebrow" data-i18n="chooseMode">¿Cómo quieres jugar?</span><h2 data-i18n="modeIntro">El mismo ritmo. Tres formas de compartirlo.</h2><div class="mode-cards"><button type="button" data-mode="solo"><span class="mode-icon">🐼</span><strong data-i18n="solo">Sola contra el ordenador</strong><small data-i18n="soloDesc">Tú y tres animales automáticos. Sin conexión.</small></button><button type="button" data-mode="local"><span class="mode-icon">🐶 🐰</span><strong data-i18n="local">Multijugador local</strong><small data-i18n="localDesc">De 2 a 4 personas en la misma pantalla. Sin bots.</small></button><button type="button" data-mode="online"><span class="mode-icon">🌍</span><strong data-i18n="online">Multijugador online</strong><small data-i18n="onlineDesc">Una sala privada para jugar desde distintos dispositivos.</small></button></div></section>
+<button id="back-menu" type="button" class="menu-back" data-i18n="backMenu" hidden>Cambiar modo</button>
+<section id="mode-settings" class="card mode-settings" hidden><h2 id="mode-title"></h2><div id="profile-settings"></div><p id="swap-hint" class="muted-note" data-i18n="swapHint"></p><label id="difficulty-setting"><span data-i18n="difficulty">Dificultad</span><select id="difficulty"><option value="easy" data-i18n="easy">Fácil</option><option value="medium" data-i18n="medium">Media</option><option value="hard" data-i18n="hard">Difícil</option></select></label>
+<section id="online-panel" hidden><div id="online-unavailable" class="online-warning"><p data-i18n="serverPending"></p><a href="https://github.com/Martinaog888/digital-business-juego/blob/main/ACTIVAR-ONLINE.md" target="_blank" rel="noopener" data-i18n="serverGuide"></a></div><div id="online-form" class="online-form"><label><span data-i18n="yourName"></span><input id="online-name" maxlength="24" autocomplete="nickname"></label><label><span data-i18n="chooseAnimal"></span><select id="online-animal"></select></label><p class="muted-note" data-i18n="nameHint"></p><p id="room-preview" class="muted-note" aria-live="polite"></p><button type="button" id="create-room" class="primary" data-i18n="createRoom"></button><div class="join-row"><label><span data-i18n="roomCode"></span><input id="room-input" maxlength="8" autocomplete="off" autocapitalize="characters" spellcheck="false"></label><button id="join-room" type="button" data-i18n="joinRoom"></button></div></div>
+<div id="online-lobby" hidden><h3 data-i18n="lobby"></h3><div class="room-code"><span data-i18n="roomCode"></span> <strong id="room-code"></strong></div><label><span data-i18n="shareLabel"></span><input id="invite-link" readonly></label><button id="copy-invite" type="button" class="menu-back" data-i18n="copyInvite"></button><ul id="lobby-players"></ul><button id="online-ready" type="button" class="primary" data-i18n="readyButton"></button></div><p id="online-notice" role="status" aria-live="polite"></p><p class="muted-note" data-i18n="onlineFair"></p></section></section>
+<div class="layout" id="game-layout" hidden>
 <section class="game-panel" aria-label="Zona de juego">
 <div class="game-top"><span class="live"><i></i><span data-i18n="live">SOLO PERSONAS, CERO BOTS</span></span><span id="round">PREPARA TU PARTIDA</span></div>
 <div id="arena" class="arena">
@@ -138,7 +170,6 @@ h1>[data-i18n="headline"]{color:var(--ink)}
   else root.ChairGame = ChairGame;
 })(typeof globalThis !== "undefined" ? globalThis : this);
 
-
 </script><script>
 (() => {
 "use strict";
@@ -188,12 +219,15 @@ const translations = {
  readyTitle:"Bereit zum Tanzen", readyDescription:"Versammelt euch und startet das Spiel.", readyStatus:"Wählt aus, wie viele Personen mitspielen.", start:"Spiel starten", replay:"Noch mal spielen", next:"Nächste Runde", repeatRound:"Runde wiederholen", running:"Die Runde läuft ♫", musicTitle:"Folge dem Rhythmus!", musicDescription:"Warte… die Musik kann jeden Moment stoppen.", musicStatus:"Drücke erst, wenn die Musik stoppt.", visualStatus:"Achte auf den Bildschirm: Warte auf „Hinsetzen!“.", audioError:"Kein Ton verfügbar: Achte auf „Hinsetzen!“.", stopTitle:"Hinsetzen!", stopDescription:"Tippe auf dein Tier oder drücke deine Taste. Jede Millisekunde zählt!", stopStatus:"Die Musik ist aus! Schnapp dir deinen Stuhl.", early:"Spieler {n}: noch nicht! Lass die Taste los oder hebe den Finger und warte.", seated:"Spieler {n} hat einen Stuhl. Es sind noch Plätze frei!", eliminated:"Spieler {n} hat in Runde {round} keinen Stuhl bekommen.", winTitle:"Spieler {n} gewinnt!", winDescription:"Meisterhafter Reflex! Lust auf eine Revanche?", resultTitle:"Ein Stuhl weniger!", resultDescription:"Spieler {n} scheidet aus. Wir tanzen weiter.", pauseTitle:"Eine Pause für alle", pauseDescription:"Wiederholt die Runde, sobald alle bereit sind.", pauseStatus:"Runde beim Verlassen des Fensters abgebrochen. Niemand scheidet aus.", soundOn:"♫ Ton an", soundOff:"♫ Ton aus"
  }
 };
+const modeTranslations = {"es-ES": {"chooseMode": "¿Cómo quieres jugar?", "modeIntro": "El mismo ritmo. Tres formas de compartirlo.", "solo": "Sola contra el ordenador", "soloDesc": "Tú y tres animales automáticos. Sin conexión.", "local": "Multijugador local", "localDesc": "De 2 a 4 personas en la misma pantalla. Sin bots.", "online": "Multijugador online", "onlineDesc": "Una sala privada para jugar desde distintos dispositivos.", "backMenu": "Cambiar modo", "yourName": "Tu nombre", "profileName": "Nombre del participante", "chooseAnimal": "Elige tu animal", "profiles": "Nombres y animales", "swapHint": "En local, elegir un animal ocupado intercambia ambos animales.", "difficulty": "Dificultad", "easy": "Fácil", "medium": "Media", "hard": "Difícil", "bot": "{animal} · ordenador", "soloBadge": "TÚ Y TRES RIVALES AUTOMÁTICOS", "onlineBadge": "SALA PRIVADA · JUEGO ONLINE", "namedEarly": "{name}: ¡todavía no! Suelta y espera.", "namedSeated": "{name} ya tiene silla. ¡Aún queda sitio!", "namedEliminated": "{name} se ha quedado sin silla en la ronda {round}.", "namedWin": "¡Gana {name}!", "namedResult": "{name} queda eliminado. Seguimos bailando.", "roomCode": "Código de sala", "createRoom": "Crear sala", "joinRoom": "Entrar", "lobby": "Sala de espera", "readyButton": "Activar sonido y prepararme", "readyLabel": "Preparado", "notReadyLabel": "Sin preparar", "connectedLabel": "Conectado", "disconnectedLabel": "Sin conexión", "hostLabel": "Anfitrión", "copyInvite": "Copiar invitación", "copyDone": "Invitación copiada.", "copyManual": "Selecciona y copia el enlace de invitación.", "shareLabel": "Enlace de invitación", "roomPlaceholder": "Código de 8 caracteres", "nameHint": "Hasta 24 caracteres. Puedes usar un apodo.", "serverPending": "El modo online necesita activar el servidor gratuito. Los modos individual y local ya funcionan.", "serverGuide": "Cómo activar las salas online", "waitingHost": "Esperando al anfitrión", "waitingPlayers": "Esperando a 2–4 jugadores preparados.", "spectating": "Estás viendo la partida. Podrás volver a jugar en la revancha.", "onlineFair": "El servidor asigna las sillas por orden de llegada de los mensajes válidos. La conexión puede influir. Si alguien se desconecta, la ronda se pausa durante un máximo de 20 segundos.", "onlineCountdown": "La música empieza en {n}…", "onlineMusic": "Sigue el ritmo. El servidor dará la señal.", "onlinePaused": "Pausa de conexión. Preparad todos vuestros dispositivos para repetir la ronda.", "onlineCancelled": "La partida se canceló por una desconexión. Podéis prepararla de nuevo.", "onlineLobby": "Elegid los animales y preparaos. El anfitrión comenzará la partida.", "reconnecting": "Reconectando con la sala…", "lowConnection": "La conexión tiene retraso; puede afectar a la partida.", "sit": "¡Sentarse!", "netError_connection": "No se ha podido conectar con la sala.", "netError_roomMissing": "La sala no existe o ha caducado.", "netError_full": "La sala está completa.", "netError_animal": "Ese animal ya está ocupado. Elige otro.", "netError_name": "Escribe un nombre de 1 a 24 caracteres.", "netError_started": "La partida ya ha comenzado. Espera a la próxima sala.", "netError_session": "La sesión ha caducado o se ha abierto en otro dispositivo.", "netError_notHost": "Solo el anfitrión puede iniciar la ronda.", "netError_notReady": "Hacen falta entre 2 y 4 personas preparadas.", "netError_early": "Todavía no: levanta el dedo o suelta la tecla y espera.", "netError_stale": "Esa pulsación no corresponde a la ronda actual.", "netError_spectator": "Estás como espectador.", "netError_message": "El servidor ha rechazado la petición.", "netError_rate": "Demasiadas peticiones. Espera un momento.", "modeSelected": "Modo: {mode}", "onlineLocalNote": "Cada persona controla solo su animal.", "profileLocked": "Los nombres y animales se pueden cambiar al volver al menú.", "credit": "Hecho para Digital Business · 1–4 personas", "people": {"one": "{n} jugador", "other": "{n} jugadores"}}, "en-GB": {"chooseMode": "How would you like to play?", "modeIntro": "The same rhythm. Three ways to enjoy it.", "solo": "Solo against the computer", "soloDesc": "You and three computer-controlled animals. Play offline.", "local": "Local multiplayer", "localDesc": "2–4 people on one screen. No bots.", "online": "Online multiplayer", "onlineDesc": "A private room for players on different devices.", "backMenu": "Change mode", "yourName": "Your name", "profileName": "Player name", "chooseAnimal": "Choose your animal", "profiles": "Names and animals", "swapHint": "In local mode, choosing an occupied animal swaps the two animals.", "difficulty": "Difficulty", "easy": "Easy", "medium": "Medium", "hard": "Hard", "bot": "{animal} · computer", "soloBadge": "YOU AND THREE COMPUTER OPPONENTS", "onlineBadge": "PRIVATE ROOM · ONLINE PLAY", "namedEarly": "{name}: not yet! Release and wait.", "namedSeated": "{name} has a chair. There's still room!", "namedEliminated": "{name} missed out on a chair in round {round}.", "namedWin": "{name} wins!", "namedResult": "{name} is out. Let's keep dancing.", "roomCode": "Room code", "createRoom": "Create room", "joinRoom": "Join", "lobby": "Waiting room", "readyButton": "Enable sound and get ready", "readyLabel": "Ready", "notReadyLabel": "Not ready", "connectedLabel": "Connected", "disconnectedLabel": "Disconnected", "hostLabel": "Host", "copyInvite": "Copy invitation", "copyDone": "Invitation copied.", "copyManual": "Select and copy the invitation link.", "shareLabel": "Invitation link", "roomPlaceholder": "8-character code", "nameHint": "Up to 24 characters. A nickname is fine.", "serverPending": "Online play needs the free server to be activated. Solo and local modes are ready to play.", "serverGuide": "How to activate online rooms", "waitingHost": "Waiting for the host", "waitingPlayers": "Waiting for 2–4 ready players.", "spectating": "You're watching the game. You can join the rematch.", "onlineFair": "The server awards chairs in the order valid messages arrive. Connection speed can affect the result. If someone disconnects, the round pauses for up to 20 seconds.", "onlineCountdown": "Music starts in {n}…", "onlineMusic": "Follow the rhythm. Wait for the server's signal.", "onlinePaused": "Connection pause. Everyone needs to get ready again to replay the round.", "onlineCancelled": "The game was cancelled after a disconnection. You can set it up again.", "onlineLobby": "Choose your animals and get ready. The host will start the game.", "reconnecting": "Reconnecting to the room…", "lowConnection": "Your connection is slow; this may affect the game.", "sit": "Sit down!", "netError_connection": "Could not connect to the room.", "netError_roomMissing": "The room does not exist or has expired.", "netError_full": "The room is full.", "netError_animal": "That animal is taken. Choose another.", "netError_name": "Enter a name with 1–24 characters.", "netError_started": "The game has already started. Please use a new room.", "netError_session": "Your session has expired or was opened on another device.", "netError_notHost": "Only the host can start the round.", "netError_notReady": "2–4 ready players are needed.", "netError_early": "Not yet: lift your finger or release your key and wait.", "netError_stale": "That press is not for the current round.", "netError_spectator": "You're a spectator.", "netError_message": "The server rejected the request.", "netError_rate": "Too many requests. Please wait a moment.", "modeSelected": "Mode: {mode}", "onlineLocalNote": "Each person controls only their own animal.", "profileLocked": "Return to the menu to change names and animals.", "credit": "Made for Digital Business · 1–4 people", "people": {"one": "{n} player", "other": "{n} players"}}, "pl-PL": {"chooseMode": "Jak chcesz zagrać?", "modeIntro": "Ten sam rytm. Trzy sposoby na zabawę.", "solo": "Solo przeciwko komputerowi", "soloDesc": "Ty i trzy zwierzątka sterowane przez komputer. Bez internetu.", "local": "Gra lokalna", "localDesc": "2–4 osoby przy jednym ekranie. Bez botów.", "online": "Gra online", "onlineDesc": "Prywatny pokój dla graczy na różnych urządzeniach.", "backMenu": "Zmień tryb", "yourName": "Twoje imię", "profileName": "Imię gracza", "chooseAnimal": "Wybierz zwierzątko", "profiles": "Imiona i zwierzątka", "swapHint": "W trybie lokalnym wybór zajętego zwierzątka zamienia zwierzątka obu graczy.", "difficulty": "Poziom trudności", "easy": "Łatwy", "medium": "Średni", "hard": "Trudny", "bot": "{animal} · komputer", "soloBadge": "TY I TRZECH KOMPUTEROWYCH RYWALI", "onlineBadge": "PRYWATNY POKÓJ · GRA ONLINE", "namedEarly": "{name}: jeszcze nie! Puść i poczekaj.", "namedSeated": "{name} ma już krzesło. Są jeszcze wolne miejsca!", "namedEliminated": "{name} nie zajmuje krzesła w rundzie {round}.", "namedWin": "Wygrywa {name}!", "namedResult": "{name} odpada. Tańczymy dalej.", "roomCode": "Kod pokoju", "createRoom": "Utwórz pokój", "joinRoom": "Dołącz", "lobby": "Poczekalnia", "readyButton": "Włącz dźwięk i zgłoś gotowość", "readyLabel": "Gotowość", "notReadyLabel": "Brak gotowości", "connectedLabel": "Połączono", "disconnectedLabel": "Brak połączenia", "hostLabel": "Gospodarz", "copyInvite": "Kopiuj zaproszenie", "copyDone": "Zaproszenie skopiowane.", "copyManual": "Zaznacz i skopiuj link zaproszenia.", "shareLabel": "Link zaproszenia", "roomPlaceholder": "Kod z 8 znaków", "nameHint": "Do 24 znaków. Możesz użyć pseudonimu.", "serverPending": "Gra online wymaga aktywacji bezpłatnego serwera. Tryby solo i lokalny są gotowe.", "serverGuide": "Jak uruchomić pokoje online", "waitingHost": "Czekamy na gospodarza", "waitingPlayers": "Czekamy na 2–4 gotowych graczy.", "spectating": "Oglądasz rozgrywkę. Możesz zagrać w rewanżu.", "onlineFair": "Serwer przydziela krzesła w kolejności otrzymania prawidłowych wiadomości. Połączenie może wpływać na wynik. Po rozłączeniu gracza runda zostaje wstrzymana na maksymalnie 20 sekund.", "onlineCountdown": "Muzyka zacznie grać za {n}…", "onlineMusic": "Poczuj rytm. Poczekaj na sygnał serwera.", "onlinePaused": "Przerwa w połączeniu. Wszyscy muszą zgłosić gotowość, aby powtórzyć rundę.", "onlineCancelled": "Gra anulowana po utracie połączenia. Możecie przygotować ją ponownie.", "onlineLobby": "Wybierzcie zwierzątka i zgłoście gotowość. Gospodarz rozpocznie grę.", "reconnecting": "Ponowne łączenie z pokojem…", "lowConnection": "Połączenie jest wolne; może to wpłynąć na grę.", "sit": "Siadaj!", "netError_connection": "Nie udało się połączyć z pokojem.", "netError_roomMissing": "Pokój nie istnieje lub wygasł.", "netError_full": "Pokój jest pełny.", "netError_animal": "To zwierzątko jest zajęte. Wybierz inne.", "netError_name": "Wpisz imię o długości 1–24 znaków.", "netError_started": "Gra już się rozpoczęła. Utwórz nowy pokój.", "netError_session": "Sesja wygasła lub została otwarta na innym urządzeniu.", "netError_notHost": "Tylko gospodarz może rozpocząć rundę.", "netError_notReady": "Potrzeba 2–4 gotowych graczy.", "netError_early": "Jeszcze nie: podnieś palec lub puść klawisz i poczekaj.", "netError_stale": "To naciśnięcie nie dotyczy bieżącej rundy.", "netError_spectator": "Oglądasz grę jako widz.", "netError_message": "Serwer odrzucił żądanie.", "netError_rate": "Za dużo żądań. Poczekaj chwilę.", "modeSelected": "Tryb: {mode}", "onlineLocalNote": "Każda osoba steruje tylko swoim zwierzątkiem.", "profileLocked": "Wróć do menu, aby zmienić imiona i zwierzątka.", "credit": "Projekt na zajęcia Digital Business · 1–4 osoby", "people": {"one": "{n} gracz", "few": "{n} graczy", "many": "{n} graczy", "other": "{n} gracza"}}, "de-DE": {"chooseMode": "Wie möchtest du spielen?", "modeIntro": "Derselbe Rhythmus. Drei Arten zu spielen.", "solo": "Allein gegen den Computer", "soloDesc": "Du und drei computergesteuerte Tiere. Auch offline.", "local": "Lokaler Mehrspielermodus", "localDesc": "2–4 Personen an einem Bildschirm. Ohne Bots.", "online": "Online-Mehrspielermodus", "onlineDesc": "Ein privater Raum für verschiedene Geräte.", "backMenu": "Modus wechseln", "yourName": "Dein Name", "profileName": "Spielername", "chooseAnimal": "Wähle dein Tier", "profiles": "Namen und Tiere", "swapHint": "Im lokalen Modus tauscht die Auswahl eines belegten Tiers die beiden Tiere.", "difficulty": "Schwierigkeitsgrad", "easy": "Leicht", "medium": "Mittel", "hard": "Schwer", "bot": "{animal} · Computer", "soloBadge": "DU UND DREI COMPUTERGEGNER", "onlineBadge": "PRIVATER RAUM · ONLINE SPIELEN", "namedEarly": "{name}: noch nicht! Loslassen und warten.", "namedSeated": "{name} hat einen Stuhl. Es sind noch Plätze frei!", "namedEliminated": "{name} hat in Runde {round} keinen Stuhl bekommen.", "namedWin": "{name} gewinnt!", "namedResult": "{name} scheidet aus. Wir tanzen weiter.", "roomCode": "Raumcode", "createRoom": "Raum erstellen", "joinRoom": "Beitreten", "lobby": "Warteraum", "readyButton": "Ton aktivieren und bereitmachen", "readyLabel": "Bereit", "notReadyLabel": "Nicht bereit", "connectedLabel": "Verbunden", "disconnectedLabel": "Verbindung getrennt", "hostLabel": "Gastgeber", "copyInvite": "Einladung kopieren", "copyDone": "Einladung kopiert.", "copyManual": "Markiere und kopiere den Einladungslink.", "shareLabel": "Einladungslink", "roomPlaceholder": "Code mit 8 Zeichen", "nameHint": "Bis zu 24 Zeichen. Ein Spitzname genügt.", "serverPending": "Für das Onlinespiel muss der kostenlose Server aktiviert werden. Solo und lokaler Modus sind spielbereit.", "serverGuide": "Onlineräume aktivieren", "waitingHost": "Warten auf den Gastgeber", "waitingPlayers": "Warten auf 2–4 bereite Personen.", "spectating": "Du schaust zu. Bei der Revanche kannst du wieder mitspielen.", "onlineFair": "Der Server vergibt Stühle in der Reihenfolge gültiger Nachrichten. Die Verbindung kann das Ergebnis beeinflussen. Bei einer Trennung pausiert die Runde bis zu 20 Sekunden.", "onlineCountdown": "Die Musik beginnt in {n}…", "onlineMusic": "Folge dem Rhythmus. Warte auf das Signal des Servers.", "onlinePaused": "Verbindungspause. Alle müssen sich bereitmachen, um die Runde zu wiederholen.", "onlineCancelled": "Das Spiel wurde wegen einer Verbindungstrennung abgebrochen. Ihr könnt es neu vorbereiten.", "onlineLobby": "Wählt eure Tiere und macht euch bereit. Der Gastgeber startet das Spiel.", "reconnecting": "Verbindung zum Raum wird wiederhergestellt…", "lowConnection": "Deine Verbindung ist langsam; das kann das Spiel beeinflussen.", "sit": "Hinsetzen!", "netError_connection": "Die Verbindung zum Raum ist fehlgeschlagen.", "netError_roomMissing": "Der Raum existiert nicht oder ist abgelaufen.", "netError_full": "Der Raum ist voll.", "netError_animal": "Dieses Tier ist belegt. Wähle ein anderes.", "netError_name": "Gib einen Namen mit 1–24 Zeichen ein.", "netError_started": "Das Spiel läuft bereits. Erstelle einen neuen Raum.", "netError_session": "Die Sitzung ist abgelaufen oder wurde auf einem anderen Gerät geöffnet.", "netError_notHost": "Nur der Gastgeber kann die Runde starten.", "netError_notReady": "Es werden 2–4 bereite Personen benötigt.", "netError_early": "Noch nicht: Hebe den Finger oder lass die Taste los und warte.", "netError_stale": "Dieser Tastendruck gehört nicht zur aktuellen Runde.", "netError_spectator": "Du schaust als Zuschauer zu.", "netError_message": "Der Server hat die Anfrage abgelehnt.", "netError_rate": "Zu viele Anfragen. Bitte warte kurz.", "modeSelected": "Modus: {mode}", "onlineLocalNote": "Jede Person steuert nur ihr eigenes Tier.", "profileLocked": "Kehre zum Menü zurück, um Namen und Tiere zu ändern.", "credit": "Für Digital Business entwickelt · 1–4 Personen", "people": {"one": "{n} Spieler", "other": "{n} Spieler"}}};
+for(const [locale,entries] of Object.entries(modeTranslations))Object.assign(translations[locale],entries);
 let language = "es-ES";
 try { const saved=localStorage.getItem("la-sillita-language"); if(translations[saved]) language=saved; } catch (_) {}
 const t = (key, params={}) => {
  const text=translations[language][key];
  if(typeof text!=="string") throw new Error("Missing translation: "+language+"/"+key);
- return text.replace(/\{(\w+)\}/g,(_,name)=>String(params[name]??""));
+ const values={...params};if(Number.isInteger(values.playerId))values.name=displayName(values.playerId);
+ return text.replace(/\{(\w+)\}/g,(_,name)=>String(values[name]??""));
 };
 const plural = (key,n) => {
  const forms=translations[language][key],category=new Intl.PluralRules(language).select(n);
@@ -218,13 +252,256 @@ function refreshLanguage() {
  translateStatic();renderStats();renderRoster();
  model.players.forEach(p=>{
   const el=$("person-"+p.id);
-  el.querySelector(".creature").setAttribute("aria-label",translations[language].animals[p.id]);
-  el.querySelector(".player-tag").innerHTML="<kbd>"+labels[p.id]+"</kbd> "+t("shortPlayer",{n:p.id+1});
+  el.querySelector(".creature").setAttribute("aria-label",translations[language].animals[p.animal??p.id]);
+  el.querySelector(".player-tag").innerHTML="<kbd>"+labels[p.id]+"</kbd> "+esc(displayName(p.id));
  });
  message(stageState.title,stageState.description,stageState.icon,stageState.params);
- setStatus(statusState.key,statusState.params);setPlay(playState.key,playState.icon);
+ setStatus(statusState.key,statusState.params);setPlay(playState.key,playState.icon);renderSettings();
 }
 
+
+const SERVER_URL = "";
+let selectedMode=null,difficulty="easy";
+const profiles=Array.from({length:4},(_,animal)=>({name:"",animal}));
+let botTimers=[];
+const online={socket:null,code:"",token:"",state:null,connected:false,intentional:false,seq:0,offset:0,bestRtt:Infinity,retry:0,retryTimer:null,pingTimer:null,audioTimer:null,audioRound:null,notice:null,ownSlot:-1,generation:0,busy:false,occupied:[],preview:[]};
+const esc=value=>String(value).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function displayName(id){
+ const p=model.players[id];
+ if(p?.customName)return p.customName;
+ if(p?.bot)return t("bot",{animal:translations[language].animals[p.animal]});
+ return t("player",{n:id+1});
+}
+function canControl(id){return selectedMode==="local"||(selectedMode==="solo"&&id===0)||(selectedMode==="online"&&id===online.ownSlot);}
+function configurePlayers(){
+ if(selectedMode==="online")return;
+ model.players.forEach((p,i)=>{
+  p.animal=profiles[i].animal;p.customName=profiles[i].name;p.bot=selectedMode==="solo"&&i>0;
+ });
+}
+function configureSolo(){
+ const animal=profiles[0].animal,others=[0,1,2,3].filter(n=>n!==animal);
+ for(let i=1;i<4;i++)profiles[i]={name:"",animal:others[i-1]};
+}
+function cancelBots(){botTimers.forEach(clearTimeout);botTimers=[];}
+function scheduleBots(){
+ cancelBots();if(selectedMode!=="solo")return;
+ const [min,max]={easy:[800,1600],medium:[400,1000],hard:[180,550]}[difficulty];
+ model.players.filter(p=>p.active&&p.bot).forEach(p=>{
+  botTimers.push(setTimeout(()=>{if(model.phase==="claim"&&p.active){claim(p.id,false);model.release(p.id);}},min+Math.random()*(max-min)));
+ });
+}
+function renderSettings(){
+ const panel=$("mode-settings");if(!selectedMode){panel.hidden=true;return;}
+ panel.hidden=false;
+ $("mode-title").textContent=t(selectedMode);
+ $("difficulty-setting").hidden=selectedMode!=="solo";
+ $("profile-settings").hidden=selectedMode==="online";
+ $("swap-hint").hidden=selectedMode!=="local";
+ if(selectedMode!=="online"){
+  const n=selectedMode==="solo"?1:count;
+  $("profile-settings").innerHTML=Array.from({length:n},(_,i)=>'<div class="profile-editor"><label>'+esc(t("profileName"))+' '+(i+1)+'<input data-profile-name="'+i+'" maxlength="24" autocomplete="off" value="'+esc(profiles[i].name)+'" placeholder="'+esc(t("player",{n:i+1}))+'"></label><label>'+esc(t("chooseAnimal"))+'<select data-profile-animal="'+i+'">'+translations[language].animals.map((a,index)=>'<option value="'+index+'" '+(profiles[i].animal===index?'selected':'')+'>'+esc(a)+'</option>').join("")+'</select></label></div>').join("");
+  document.querySelectorAll("[data-profile-name]").forEach(input=>input.addEventListener("input",()=>{
+   profiles[Number(input.dataset.profileName)].name=[...input.value.trim()].slice(0,24).join("");
+   configurePlayers();renderRoster();renderStats();
+   model.players.forEach(p=>{$("person-"+p.id).querySelector(".player-tag").innerHTML="<kbd>"+labels[p.id]+"</kbd> "+esc(displayName(p.id));});
+  }));
+  document.querySelectorAll("[data-profile-animal]").forEach(select=>select.addEventListener("change",()=>{
+   const id=Number(select.dataset.profileAnimal),animal=Number(select.value),old=profiles[id].animal;
+   if(selectedMode==="local"){const other=profiles.slice(0,count).find((p,i)=>i!==id&&p.animal===animal);if(other)other.animal=old;}
+   profiles[id].animal=animal;if(selectedMode==="solo")configureSolo();
+   configurePlayers();renderPeople();positionPeople();renderStats();renderSettings();
+  }));
+ }
+ $("difficulty").value=difficulty;
+ renderOnlinePanel();syncModeControls();
+}
+function syncModeControls(){
+ document.querySelector(".field-label").hidden=selectedMode!=="local";
+ document.querySelector(".count-selector").hidden=selectedMode!=="local";
+ document.querySelectorAll("#profile-settings input,#profile-settings select,#difficulty").forEach(e=>e.disabled=model.phase!=="ready");
+ const badge=document.querySelector('[data-i18n="live"]');if(badge)badge.textContent=t(selectedMode==="solo"?"soloBadge":selectedMode==="online"?"onlineBadge":"live");
+ $("touch-controls").classList.toggle("single-control",selectedMode!=="local");
+ $("touch-controls").hidden=selectedMode==="online"&&!online.state;
+ const note=document.querySelector('[data-i18n="localNote"]');if(note)note.textContent=t(selectedMode==="online"?"onlineLocalNote":"localNote");
+ if(selectedMode==="online"){
+  renderOnlinePanel();
+  const state=online.state,me=state?.players.find(p=>p.id===state.you),host=state?.host===state?.you;
+  const able=state&&state.players.length>=2&&state.players.filter(p=>state.phase==="lobby"||p.active).every(p=>p.connected&&p.ready);
+  $("play").disabled=!online.connected||!host||!able||!["lobby","result","finished","paused"].includes(state?.phase);
+  if(!host)setPlay("waitingHost");else setPlay(state?.phase==="finished"?"replay":state?.phase==="result"?"next":state?.phase==="paused"?"repeatRound":"start","↗");
+  $("reset").hidden=true;
+  if(me&&!me.active)$("touch-prompt").textContent=t("spectating");
+ }
+}
+function selectMode(mode){
+ leaveOnline();clearEffects();clearInputs();selectedMode=mode;
+ document.body.classList.remove("menu-open");$("mode-menu").hidden=true;$("game-layout").hidden=false;$("back-menu").hidden=false;
+ if(mode==="solo")configureSolo();
+ resetGame(mode==="local"?count:mode==="solo"?4:2);
+ if(mode==="online"){
+  online.state=null;online.ownSlot=-1;model.players=[];count=0;renderPeople();renderChairs();renderStats();
+  $("room-input").value=(location.hash.match(/^#sala=([A-HJ-NP-Z2-9]{8})$/)||[])[1]||"";previewRoom();
+ }
+ renderSettings();
+}
+function showMenu(){
+ leaveOnline();clearEffects();clearInputs();selectedMode=null;
+ document.body.classList.add("menu-open");$("mode-menu").hidden=false;$("game-layout").hidden=true;$("mode-settings").hidden=true;$("back-menu").hidden=true;
+ if(location.hash.startsWith("#sala="))history.replaceState(null,"",location.pathname+location.search);
+}
+function onlineError(code){
+ const key=Object.prototype.hasOwnProperty.call(translations[language],"netError_"+code)?"netError_"+code:"netError_connection";
+ online.notice=key;renderOnlinePanel();
+}
+function renderOnlinePanel(){
+ $("online-panel").hidden=selectedMode!=="online";if(selectedMode!=="online")return;
+ const available=Boolean(SERVER_URL);
+ $("online-unavailable").hidden=available;
+ $("online-form").hidden=Boolean(online.state);
+ $("create-room").disabled=!available||online.busy||Boolean(online.socket&&online.socket.readyState<2);
+ $("join-room").disabled=$("create-room").disabled;
+ $("online-lobby").hidden=!online.state;
+ $("online-animal").innerHTML=translations[language].animals.map((name,i)=>'<option value="'+i+'" '+(Number($("online-animal").dataset.value||"0")===i?'selected':'')+(online.occupied.includes(i)?' disabled':'')+'>'+esc(name)+'</option>').join("");
+ $("online-name").setAttribute("placeholder",t("yourName"));$("room-input").setAttribute("placeholder",t("roomPlaceholder"));
+ $("online-notice").textContent=online.notice?t(online.notice):"";
+ $("room-preview").textContent=online.preview.map(p=>p.name+" · "+translations[language].animals[p.animal]).join(" / ");
+ const state=online.state;if(!state)return;
+ $("room-code").textContent=online.code;
+ const link=new URL(location.href);link.hash="sala="+online.code;
+ $("invite-link").value=link.href;
+ $("lobby-players").innerHTML=state.players.map(p=>'<li><span class="lobby-animal">'+animalSvg(p.animal)+'</span><span><strong>'+esc(p.name)+'</strong><small>'+esc(translations[language].animals[p.animal])+' · '+esc(t(p.connected?"connectedLabel":"disconnectedLabel"))+' · '+esc(t(p.ready?"readyLabel":"notReadyLabel"))+(p.id===state.host?' · '+esc(t("hostLabel")):"")+'</small></span></li>').join("");
+ const me=state.players.find(p=>p.id===state.you);
+ $("online-ready").disabled=!online.connected||Boolean(me?.ready);
+ $("online-ready").hidden=!["lobby","paused"].includes(state.phase);
+}
+function sendOnline(type,extra={}){
+ if(online.socket?.readyState!==1)return false;
+ online.socket.send(JSON.stringify({type,seq:++online.seq,...extra}));return true;
+}
+function leaveOnline(){
+ online.generation++;online.occupied=[];online.preview=[];online.busy=false;online.intentional=true;clearTimeout(online.retryTimer);clearTimeout(online.audioTimer);clearInterval(online.pingTimer);
+ if(online.socket?.readyState===1)sendOnline("leave");
+ online.socket?.close();if(online.code){try{sessionStorage.removeItem("sillita-session-"+online.code);}catch(_){}}online.socket=null;online.connected=false;online.state=null;online.token="";online.notice=null;online.audioRound=null;online.code="";online.ownSlot=-1;online.retry=0;
+}
+async function previewRoom(){
+ const code=$("room-input").value.trim().toUpperCase();if(!SERVER_URL||!/^[A-HJ-NP-Z2-9]{8}$/.test(code))return;
+ const generation=online.generation;
+ try{const response=await fetch(SERVER_URL.replace(/\/$/,"")+"/rooms/"+code+"/info");const data=await response.json();if(generation!==online.generation)return;
+ if(response.ok){online.preview=data.players;online.occupied=data.players.map(p=>p.animal);renderOnlinePanel();}
+ }catch(_){}
+}
+async function openRoom(create=false,reconnect=false){
+ if(!SERVER_URL||online.busy)return;
+ const generation=online.generation;
+ const name=$("online-name").value.trim(),animal=Number($("online-animal").value);
+ if(!reconnect&&(!name||[...name].length>24)){onlineError("name");return;}
+ online.busy=true;renderOnlinePanel();
+ try{
+  if(!reconnect){
+   online.intentional=false;online.notice=null;online.token="";online.retry=0;
+   await unlockAudio();if(generation!==online.generation||selectedMode!=="online")return;
+   if(create){
+    const response=await fetch(SERVER_URL.replace(/\/$/,"")+"/rooms",{method:"POST"});
+    const result=await response.json();if(generation!==online.generation||selectedMode!=="online")return;if(!response.ok){onlineError(result.error);return;}online.code=result.code;
+   }else{
+    online.code=$("room-input").value.trim().toUpperCase();
+    if(!/^[A-HJ-NP-Z2-9]{8}$/.test(online.code)){onlineError("roomMissing");return;}
+    try{online.token=sessionStorage.getItem("sillita-session-"+online.code)||"";}catch(_){}
+    await previewRoom();if(!online.token&&online.occupied.includes(animal)){onlineError("animal");return;}
+   }
+  }
+  const endpoint=new URL(SERVER_URL);if(endpoint.protocol!=="https:"&&!["127.0.0.1","localhost"].includes(endpoint.hostname))throw Error("protocol");
+  endpoint.protocol=endpoint.protocol==="https:"?"wss:":"ws:";endpoint.pathname="/rooms/"+online.code+"/socket";
+  online.socket?.close();
+  const socket=new WebSocket(endpoint);online.socket=socket;online.seq=0;
+  socket.onopen=()=>{
+   if(socket!==online.socket)return;
+   online.connected=true;online.retry=0;
+   sendOnline("join",{name,animal,token:online.token||undefined});
+   socket.send(JSON.stringify({type:"ping",sent:Date.now()}));
+   clearInterval(online.pingTimer);online.pingTimer=setInterval(()=>{if(socket.readyState===1)socket.send(JSON.stringify({type:"ping",sent:Date.now()}));},10000);
+   renderOnlinePanel();
+  };
+  socket.onmessage=event=>{
+   if(socket!==online.socket)return;
+   try{
+    const msg=JSON.parse(event.data);
+    if(msg.type==="session"){online.token=msg.token;try{sessionStorage.setItem("sillita-session-"+online.code,msg.token);}catch(_){}}
+    if(msg.type==="pong"){
+     const rtt=Date.now()-msg.sent;if(rtt>=0&&rtt<online.bestRtt){online.bestRtt=rtt;online.offset=msg.serverNow-(msg.sent+Date.now())/2;}
+     if(rtt>700){online.notice="lowConnection";renderOnlinePanel();}
+    }
+    if(msg.type==="state"){online.notice=null;applyOnlineState(msg);}
+    if(msg.type==="error"){onlineError(msg.code);if(!online.state){if(msg.code==="session"){try{sessionStorage.removeItem("sillita-session-"+online.code);}catch(_){}online.token="";}socket.close(1000,"join failed");}}
+   }catch(_){onlineError("connection");}
+  };
+  socket.onerror=()=>onlineError("connection");
+  socket.onclose=event=>{
+   if(socket!==online.socket)return;
+   online.connected=false;clearInterval(online.pingTimer);clearTimeout(online.audioTimer);online.audioRound=null;endMusic();clearInputs();
+   if(online.intentional||selectedMode!=="online")return;
+   if(event.code===4001){online.token="";onlineError("session");syncModeControls();return;}
+   if(online.token&&online.retry<5){
+    online.notice="reconnecting";online.retryTimer=setTimeout(()=>openRoom(false,true),Math.min(10000,1000*Math.pow(2,online.retry++)));
+   }else if(!online.notice)onlineError("connection");
+   syncModeControls();
+  };
+  renderOnlinePanel();
+ }catch(_){if(generation===online.generation){online.connected=false;onlineError("connection");}}finally{if(generation===online.generation){online.busy=false;renderOnlinePanel();}}
+}
+function applyOnlineState(state){
+ const previous=online.state;online.state=state;
+ if(!Number.isFinite(online.offset)||online.bestRtt===Infinity)online.offset=state.serverNow-Date.now();
+ online.ownSlot=state.players.findIndex(p=>p.id===state.you);
+ const rosterChanged=!previous||previous.players.map(p=>p.id+":"+p.animal).join()!==state.players.map(p=>p.id+":"+p.animal).join();
+ count=state.players.length;
+ model.players=state.players.map((p,id)=>({id,onlineId:p.id,animal:p.animal,customName:p.name,bot:false,active:p.active,seats:p.seats,eliminatedRound:p.eliminatedRound}));
+ model.phase=state.phase==="lobby"?"ready":state.phase;model.round=state.round;
+ model.claims=state.claims.map(id=>state.players.findIndex(p=>p.id===id));model.winner=state.winner?state.players.findIndex(p=>p.id===state.winner):null;
+ if(rosterChanged)renderPeople();
+ const phaseChange=!previous||previous.phase!==state.phase||previous.round!==state.round;
+ if(phaseChange){
+  $("arena").classList.remove("dancing","stopped");$("confetti").innerHTML="";
+  clearTimeout(online.audioTimer);
+  if(state.phase==="music"){
+   const begin=()=>{if(online.state?.phase!=="music")return;$("arena").classList.add("dancing");message("musicTitle","musicDescription");if(online.audioRound!==state.round){online.audioRound=state.round;music(Math.max(0,Date.now()+online.offset-state.startAt));}};
+   if(Date.now()+online.offset<state.startAt){message("onlineCountdown","onlineMusic","♫",{n:Math.ceil((state.startAt-Date.now()-online.offset)/1000)});online.audioTimer=setTimeout(begin,Math.max(0,state.startAt-Date.now()-online.offset));}else begin();
+  }else{
+   endMusic();online.audioRound=null;
+   if(state.phase==="claim"){$("arena").classList.add("stopped");message("stopTitle","stopDescription","!");}
+   else if(state.phase==="finished"){message("namedWin","winDescription","★",{playerId:model.winner});celebrate();}
+   else if(state.phase==="result"){const loser=model.players.find(p=>p.eliminatedRound===state.round);message("resultTitle","namedResult","↗",{playerId:loser?.id});}
+   else if(state.phase==="paused")message("pauseTitle","onlinePaused","Ⅱ");
+   else message("lobby",state.cancelled?"onlineCancelled":"onlineLobby");
+  }
+  renderChairs();
+ }
+ // Les sièges gardent les couleurs décidées par le serveur.
+ model.claims.forEach((id,index)=>{const chair=$("chairs").children[index];if(chair){chair.classList.add("taken");chair.style.setProperty("--player",palette[model.players[id].animal]);}});
+ positionPeople();renderStats();renderRoster();
+ setStatus(state.phase==="claim"?"stopStatus":state.phase==="music"?"onlineMusic":state.phase==="paused"?"onlinePaused":state.phase==="lobby"?(state.cancelled?"onlineCancelled":"onlineLobby"):state.phase==="finished"?"winDescription":"resultTitle");
+ syncModeControls();
+}
+function onlineAway(){
+ if(selectedMode!=="online")return false;
+ endMusic();clearTimeout(online.audioTimer);online.audioRound=null;clearInputs();sendOnline("away");return true;
+}
+function celebrate(){
+ $("confetti").innerHTML=Array.from({length:32},(_,i)=>'<i class="confetto" style="--left:'+((i*37)%100)+'%;--color:'+palette[i%4]+';--duration:'+(2+i%4*.4)+'s;--delay:-'+(i%7*.3)+'s"></i>').join("");
+}
+document.querySelectorAll("[data-mode]").forEach(button=>button.addEventListener("click",()=>selectMode(button.dataset.mode)));
+$("back-menu").addEventListener("click",showMenu);
+$("difficulty").addEventListener("change",()=>difficulty=$("difficulty").value);
+$("room-input").addEventListener("change",previewRoom);
+$("online-animal").addEventListener("change",()=>$("online-animal").dataset.value=$("online-animal").value);
+$("create-room").addEventListener("click",()=>openRoom(true));
+$("join-room").addEventListener("click",()=>openRoom(false));
+$("online-ready").addEventListener("click",async()=>{await unlockAudio();sendOnline("ready");});
+$("copy-invite").addEventListener("click",async()=>{
+ try{await navigator.clipboard.writeText($("invite-link").value);online.notice="copyDone";}
+ catch(_){$("invite-link").select();online.notice="copyManual";}renderOnlinePanel();
+});
 
 const model = new ChairGame(4);
 let count=4, roundTimer=null, audio=null, master=null, musicBus=null, beatTimer=null, noteIndex=0, busy=false, muted=false, stopAt=0;
@@ -260,29 +537,34 @@ function updateTouchControls(){
  $("touch-controls").classList.toggle("touch-go",model.phase==="claim");
  document.querySelectorAll("[data-touch-player]").forEach(button=>{
   const id=Number(button.dataset.touchPlayer),player=model.players[id],seated=model.claims.includes(id);
+  const animal=player?.animal??id;
+  if(button.dataset.animal!==String(animal)){button.querySelector(".touch-avatar").innerHTML=animalSvg(animal);button.dataset.animal=String(animal);}
+  button.style.setProperty("--player",palette[animal]);
+  button.hidden=selectedMode!=="local"&&!canControl(id);
   const state=!player?"touchAbsent":!player.active?"outLabel":seated?"touchSeated":model.phase==="claim"?"touchTap":"touchWaitShort";
-  button.querySelector("strong").textContent=translations[language].animals[id];
+  button.querySelector("strong").textContent=selectedMode==="online"?t("sit"):player?displayName(id):translations[language].animals[animal];
   button.querySelector("small").textContent=t(state);
-  button.setAttribute("aria-label",t("touchPlayer",{n:id+1,animal:translations[language].animals[id],key:labels[id]})+". "+t(state));
-  button.disabled=!player||!player.active||!playable||seated;
+  button.setAttribute("aria-label",t("touchPlayer",{n:id+1,animal:translations[language].animals[animal],key:labels[id]})+". "+t(state));
+  button.disabled=!player||!player.active||!playable||seated||!canControl(id)||(selectedMode==="online"&&!online.connected);
   button.classList.toggle("touch-seated",seated);
   button.classList.toggle("touch-out",Boolean(player&&!player.active));
   button.classList.toggle("touch-held",activeInputs[id].size>0);
  });
 }
 function inputDown(id,source,repeat=false){
+ if(!canControl(id)||!selectedMode||(selectedMode==="online"&&!online.connected))return;
  if(repeat||activeInputs[id].has(source))return;
  const wasHeld=activeInputs[id].size>0;
  activeInputs[id].add(source);
  if(!wasHeld){
-  if(model.phase==="music"&&performance.now()>=stopAt)stopRound();
-  claim(id,false);
+  if(selectedMode==="online")sendOnline("press",{round:model.round,claimToken:online.state?.claimToken});
+  else {if(model.phase==="music"&&performance.now()>=stopAt)stopRound();claim(id,false);}
  }
  updateTouchControls();
 }
 function inputUp(id,source){
  activeInputs[id].delete(source);
- if(activeInputs[id].size===0)model.release(id);
+ if(activeInputs[id].size===0){model.release(id);if(selectedMode==="online"&&id===online.ownSlot)sendOnline("release");}
  updateTouchControls();
 }
 function releasePointer(event){
@@ -309,7 +591,7 @@ function tone(midi,duration=.15,type="triangle",volume=.12,bus=master) {
 async function unlockAudio() {
  try {
   if(!audio){const Audio=window.AudioContext||window.webkitAudioContext;if(!Audio) throw Error("No disponible");audio=new Audio();master=audio.createGain();master.gain.value=muted?0:.65;master.connect(audio.destination);}
-  if(audio.state!=="running") await audio.resume();
+  if(audio.state!=="running") await Promise.race([audio.resume(),new Promise(resolve=>setTimeout(resolve,700))]);
   return audio.state==="running";
  } catch (_) { setStatus("audioError"); return false; }
 }
@@ -317,34 +599,35 @@ function endMusic() {
  clearInterval(beatTimer);beatTimer=null;
  if(musicBus){musicBus.gain.cancelScheduledValues(audio.currentTime);musicBus.gain.setValueAtTime(0,audio.currentTime);const old=musicBus;setTimeout(()=>old.disconnect(),300);musicBus=null;}
 }
-function music() {
+function music(elapsed=0) {
  endMusic();if(!audio||audio.state!=="running")return;
- musicBus=audio.createGain();musicBus.connect(master);noteIndex=0;
+ musicBus=audio.createGain();musicBus.connect(master);noteIndex=Math.floor(elapsed/210);
  const beat=()=>{tone(melody[noteIndex%melody.length],.16,"triangle",.12,musicBus);if(noteIndex%2===0)tone([48,53,48,55][Math.floor(noteIndex/4)%4],.18,"sine",.17,musicBus);noteIndex++;};
  beat();beatTimer=setInterval(beat,210);
 }
 function stopRound() {
+ if(selectedMode==="online")return;
  if(!model.stopMusic())return;
  clearTimeout(roundTimer);endMusic();$("arena").classList.remove("dancing");$("arena").classList.add("stopped");
  message("stopTitle","stopDescription","!");
- setStatus("stopStatus");renderStats();
+ setStatus("stopStatus");renderStats();scheduleBots();
 }
 function renderStats() {
- updateTouchControls();
+ updateTouchControls();syncModeControls();
  const alive=model.active.length;
  const available=(model.phase==="result"||model.phase==="finished")?0:Math.max(0,model.chairs-model.claims.length);
  $("remaining").textContent=plural("chairs",available)+" · "+plural("people",alive);
  $("round").textContent=model.round ? t("round",{n:model.round,total:count-1}) : t("prepare");
- $("scores").innerHTML=model.players.map(p=>'<div class="score-row '+(p.id===model.winner?"winner":"")+'"><span>'+t("player",{n:p.id+1})+'</span><span>'+(p.id===model.winner?t("winnerLabel")+" · ":!p.active?t("outLabel")+" · ":"")+plural("chairs",p.seats)+'</span></div>').join("");
+ $("scores").innerHTML=model.players.map(p=>'<div class="score-row '+(p.id===model.winner?"winner":"")+'"><span>'+esc(displayName(p.id))+'</span><span>'+(p.id===model.winner?t("winnerLabel")+" · ":!p.active?t("outLabel")+" · ":"")+plural("chairs",p.seats)+'</span></div>').join("");
 }
 function renderRoster() {
- $("roster").innerHTML=model.players.map(p=>'<div class="roster-row" style="--player:'+palette[p.id]+'"><span class="avatar" aria-hidden="true">'+animalSvg(p.id)+'</span><span>'+t("player",{n:p.id+1})+' <span class="animal-name">· '+translations[language].animals[p.id]+'</span></span><kbd>'+labels[p.id]+'</kbd></div>').join("");
+ $("roster").innerHTML=model.players.map(p=>'<div class="roster-row" style="--player:'+palette[p.animal??p.id]+'"><span class="avatar" aria-hidden="true">'+animalSvg(p.animal??p.id)+'</span><span>'+esc(displayName(p.id))+' <span class="animal-name">· '+translations[language].animals[p.animal??p.id]+'</span></span><kbd>'+labels[p.id]+'</kbd></div>').join("");
 }
 function renderPeople() {
  renderRoster();
- $("characters").innerHTML=model.players.map(p=>'<div class="character" id="person-'+p.id+'" style="--player:'+palette[p.id]+';--delay:-'+p.id*.13+'s"><div class="creature" role="img" aria-label="'+translations[language].animals[p.id]+'">'+animalSvg(p.id)+'</div><span class="player-tag"><kbd>'+labels[p.id]+'</kbd> '+t('shortPlayer',{n:p.id+1})+'</span></div>').join("");
+ $("characters").innerHTML=model.players.map(p=>'<div class="character" id="person-'+p.id+'" style="--player:'+palette[p.animal??p.id]+';--delay:-'+p.id*.13+'s"><div class="creature" role="img" aria-label="'+translations[language].animals[p.animal??p.id]+'">'+animalSvg(p.animal??p.id)+'</div><span class="player-tag"><kbd>'+labels[p.id]+'</kbd> '+esc(displayName(p.id))+'</span></div>').join("");
 }
-function renderChairs() { $("chairs").innerHTML=Array.from({length:model.chairs},()=>'<div class="chair"><i></i></div>').join(""); }
+function renderChairs() { $("chairs").innerHTML=Array.from({length:selectedMode==="online"&&["result","finished"].includes(model.phase)?model.claims.length:model.chairs},()=>'<div class="chair"><i></i></div>').join(""); }
 function positionPeople(time=0) {
  const playing=model.phase==="music";
  model.players.forEach(p=>{
@@ -356,15 +639,16 @@ function positionPeople(time=0) {
   element.style.left=x+"%";element.style.top=y+"%";element.classList.toggle("out",!p.active);element.classList.toggle("winner",p.id===model.winner);element.classList.toggle("seated",seat>=0);
  });
 }
-function animate(time){if(model.phase==="music") positionPeople(time);requestAnimationFrame(animate);}
-function clearEffects(){clearTimeout(roundTimer);roundTimer=null;endMusic();$("arena").classList.remove("dancing","stopped");$("confetti").innerHTML="";}
+function animate(time){if(model.phase==="music") positionPeople(selectedMode==="online"?Math.max(0,Date.now()+online.offset-(online.state?.startAt||Date.now())):time);requestAnimationFrame(animate);}
+function clearEffects(){cancelBots();clearTimeout(roundTimer);roundTimer=null;endMusic();$("arena").classList.remove("dancing","stopped");$("confetti").innerHTML="";}
 function resetGame(newCount=count) {
- clearEffects();clearInputs();count=newCount;model.reset(count);busy=false;
+ clearEffects();clearInputs();count=newCount;model.reset(count);configurePlayers();busy=false;
  selectButtons.forEach(b=>{const selected=Number(b.dataset.count)===count;b.classList.toggle("selected",selected);b.setAttribute("aria-pressed",String(selected));b.disabled=false;});
  renderPeople();renderChairs();positionPeople();renderStats();message("readyTitle","readyDescription");
  setStatus("readyStatus");$("play").disabled=false;setPlay("start","↗");$("reset").hidden=true;
 }
 async function startRound() {
+ if(!selectedMode||selectedMode==="online")return;
  if(busy||!["ready","result","paused"].includes(model.phase))return;
  busy=true;$("play").disabled=true;
  const soundReady=await unlockAudio();
@@ -382,29 +666,29 @@ async function startRound() {
 }
 function claim(id,repeat) {
  const result=model.press(id,repeat);
- if(result.type==="early"){setStatus("early",{n:id+1});return;}
+ if(result.type==="early"){setStatus("namedEarly",{playerId:id});return;}
  if(!["seat","elimination"].includes(result.type))return;
  const index=model.claims.indexOf(id),chair=$("chairs").children[index];
- if(chair){chair.classList.add("taken");chair.style.setProperty("--player",palette[id]);}
+ if(chair){chair.classList.add("taken");chair.style.setProperty("--player",palette[model.players[id].animal??id]);}
  positionPeople();renderStats();tone(80+index*3,.11,"sine",.11);
- if(result.type==="seat"){setStatus("seated",{n:id+1});return;}
+ if(result.type==="seat"){setStatus("namedSeated",{playerId:id});return;}
  clearEffects();positionPeople();
- setStatus("eliminated",{n:result.loser+1,round:model.round});
+ setStatus("namedEliminated",{playerId:result.loser,round:model.round});
  if(model.phase==="finished"){
-  message("winTitle","winDescription","★",{n:model.winner+1});
+  message("namedWin","winDescription","★",{playerId:model.winner});
   $("play").disabled=false;setPlay("replay","↻");$("reset").hidden=true;
   $("confetti").innerHTML=Array.from({length:32},(_,i)=>'<i class="confetto" style="--left:'+((i*37)%100)+'%;--color:'+palette[i%4]+';--duration:'+(2+i%4*.4)+'s;--delay:-'+(i%7*.3)+'s"></i>').join("");
  } else {
-  message("resultTitle","resultDescription","↗",{n:result.loser+1});
+  message("resultTitle","namedResult","↗",{playerId:result.loser});
   $("play").disabled=false;setPlay("next","↗");
  }
 }
-selectButtons.forEach(b=>b.addEventListener("click",()=>{if(model.phase==="ready")resetGame(Number(b.dataset.count));}));
-$("play").addEventListener("click",()=>{if(model.phase==="finished"){resetGame();}else startRound();});
+selectButtons.forEach(b=>b.addEventListener("click",()=>{if(model.phase==="ready"&&selectedMode==="local"){resetGame(Number(b.dataset.count));renderSettings();}}));
+$("play").addEventListener("click",()=>{if(selectedMode==="online"){sendOnline(online.state?.phase==="finished"?"replay":"start");return;}if(model.phase==="finished"){resetGame();}else startRound();});
 $("reset").addEventListener("click",()=>resetGame());
 $("sound").addEventListener("click",async()=>{muted=!muted;if(master)master.gain.setValueAtTime(muted?0:.65,audio.currentTime);$("sound").textContent=t(muted?"soundOff":"soundOn");$("sound").setAttribute("aria-pressed",String(!muted));if(!muted)await unlockAudio();});
 window.addEventListener("keydown",event=>{
- if(event.ctrlKey||event.metaKey||event.altKey||event.target.closest(".language-picker"))return;
+ if(event.ctrlKey||event.metaKey||event.altKey||event.target.closest?.(".language-picker,input,select,textarea,[contenteditable=true]"))return;
  let id=keys.indexOf(event.code);
  if(id<0)id=labels.indexOf(event.key.toUpperCase());
  if(id<0||id>=count)return;
@@ -413,6 +697,7 @@ window.addEventListener("keydown",event=>{
 });
 window.addEventListener("keyup",event=>{let id=keys.indexOf(event.code);if(id<0)id=labels.indexOf(event.key.toUpperCase());if(id>=0)inputUp(id,"keyboard");});
 function suspendRound(){
+ if(onlineAway())return;
  clearInputs();
  if(!model.pause()) {model.held.clear();return;}
  clearEffects();renderChairs();positionPeople();renderStats();message("pauseTitle","pauseDescription","Ⅱ");
@@ -428,8 +713,9 @@ document.querySelectorAll("[data-language]").forEach(button=>button.addEventList
  // Return keyboard focus to the game so assigned keys still work immediately.
  button.blur();
 }));
-createTouchControls();resetGame();refreshLanguage();requestAnimationFrame(animate);
+createTouchControls();resetGame();refreshLanguage();showMenu();
+if(/^#sala=[A-HJ-NP-Z2-9]{8}$/.test(location.hash))selectMode("online");
+requestAnimationFrame(animate);
 })();
-
 
 </script></body></html>
